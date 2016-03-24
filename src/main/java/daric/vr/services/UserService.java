@@ -2,38 +2,41 @@ package daric.vr.services;
 
 import daric.vr.entities.User;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
+@Stateless
+@Path("userService")
+@Produces(MediaType.APPLICATION_JSON)
 public class UserService {
-    private final EntityManager em = Persistence.createEntityManagerFactory("VehicleReservation").createEntityManager();
+    @PersistenceContext
+    private EntityManager em;
 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     public User addUser(User user) {
-        em.getTransaction().begin();
-        User newUser = em.merge(user);
-        em.getTransaction().commit();
-        return newUser;
+        return em.merge(user);
     }
 
-    public void deleteUser(int id) {
-        em.getTransaction().begin();
+    @DELETE
+    @Path("{id}")
+    public void deleteUser(@PathParam("id") int id) {
         em.remove(em.find(User.class, id));
-        em.getTransaction().commit();
     }
 
-    public User getUser(int id) {
-        em.getTransaction().begin();
-        try {
+    @GET
+    @Path("{id}")
+    public User getUser(@PathParam("id") int id) {
             return em.find(User.class, id);
-        } finally {
-            em.getTransaction().commit();
-        }
     }
 
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
     public User updateUser(User user) {
-        em.getTransaction().begin();
-        User updatedUser = em.merge(user);
-        em.getTransaction().commit();
-        return updatedUser;
+        return em.merge(user);
     }
 }

@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(name = "selectAllCarType", query = "select c from CarType c")
 @Entity
 @Table(name = "CAR_TYPE")
 public class CarType {

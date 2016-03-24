@@ -36,10 +36,11 @@ public class CarTypeService {
 
     @GET
     public List getAll() {
-        return em.createQuery("select c from CarType c").getResultList();
+        return em.createNamedQuery("selectAllCarType").getResultList();
     }
 
     @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
     public CarType updateCarType(CarType carType) {
         return em.merge(carType);
     }

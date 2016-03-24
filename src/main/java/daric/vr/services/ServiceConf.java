@@ -14,6 +14,8 @@ public class ServiceConf extends Application{
     private Set<Class<?>> getRestResourceClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         resources.add(CarTypeService.class);
+        resources.add(CarService.class);
+        resources.add(UserService.class);
         return resources;
     }
 }

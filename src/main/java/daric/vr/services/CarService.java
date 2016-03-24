@@ -2,41 +2,54 @@ package daric.vr.services;
 
 import daric.vr.entities.Car;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import java.util.List;
 
-/**
- * Created by darya on 16.03.16.
- */
+@Stateless
+@Path("carService")
+@Produces(MediaType.APPLICATION_JSON)
 public class CarService {
-    private final EntityManager em = Persistence.createEntityManagerFactory("VehicleReservation").createEntityManager();
+    @PersistenceContext(unitName = "VehicleReservation")
+    private EntityManager em;
 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     public Car addCar(Car Car){
-        em.getTransaction().begin();
-        Car Car1 = em.merge(Car);
-        em.getTransaction().commit();
-        return Car1;
+        return em.merge(Car);
     }
 
-    public void deleteCar(int id) {
-        em.getTransaction().begin();
+    @DELETE
+    @Path("{id}")
+    public void deleteCar(@PathParam("id") int id) {
         em.remove(em.find(Car.class, id));
-        em.getTransaction().commit();
     }
 
-    public Car getCar(int id) {
-        em.getTransaction().begin();
-        try {
+    @GET
+    @Path("{id}")
+    public Car getCar(@PathParam("id") int id) {
             return em.find(Car.class, id);
-        } finally {
-            em.getTransaction().commit();
-        }
     }
 
+    @GET
+    @Path("orders/{id}")
+    public Car getCarOrders(@PathParam("id") int id){
+        Car car = em.find(Car.class, id);
+        car.getOrders();
+        return car;
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
     public Car updateCar(Car Car) {
-        em.getTransaction().begin();
-        Car updatedCar = em.merge(Car);
-        em.getTransaction().commit();
-        return updatedCar;
+        return em.merge(Car);
+    }
+
+    @GET
+    public List getCarByAddress(@QueryParam("address") String address){
+        return em.createNamedQuery("Car.getByAddress").setParameter("address",address).getResultList();
     }
 }

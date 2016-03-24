@@ -1,10 +1,14 @@
 package daric.vr.entities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+
+@NamedQuery(name = "Car.getByAddress", query = "select c from Car c where c.address like :address")
+
 @Table(name = "CAR")
 public class Car {
     @Id
@@ -31,6 +35,7 @@ public class Car {
     @OneToMany(mappedBy = "carId", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
+    @XmlTransient
     public List<Order> getOrders() {
         return orders;
     }
@@ -59,6 +64,7 @@ public class Car {
         this.color = color;
     }
 
+    @XmlTransient
     public CarType getCarType() {
         return carType;
     }

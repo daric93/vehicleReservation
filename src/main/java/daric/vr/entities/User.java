@@ -1,20 +1,18 @@
 package daric.vr.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
+@NamedQuery(name = "getUserByMail", query = "select user from User user where user.mail like :mail")
 @Table(name = "USER")
 public class User {
     @Id
     @GeneratedValue
     @Column(name = "USER_ID")
     private int userId;
-
-    @Column(name = "USER_NAME", length = 20, unique = true, nullable = false)
-    private String userName;
 
     @Column(name = "PASSWORD", length = 20, nullable = false)
     private String password;
@@ -26,15 +24,15 @@ public class User {
     private String surname;
 
     @Column(name = "BIRTH_DATE", nullable = false)
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "MAIL", unique = true, nullable = false, length = 50)
     private String mail;
 
-    @Column(name = "NUMBER", unique = true, nullable = false, length = 20)
+    @Column(name = "NUMBER", nullable = false, length = 20)
     private String telNumber;
 
-    @Column(name = "LICENSE", unique = true, nullable = false, length = 50)
+    @Column(name = "LICENSE", length = 50)
     private String license;
 
     @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
@@ -50,14 +48,6 @@ public class User {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getSurname() {
@@ -92,11 +82,11 @@ public class User {
         this.telNumber = telNumber;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -114,5 +104,16 @@ public class User {
 
     public void setLicense(String license) {
         this.license = license;
+    }
+
+    @Override
+    public String toString() {
+        return "Name " + name + "\n" +
+                "Surname " + surname + "\n" +
+                "Mail " + mail + "\n" +
+                "Birth " + dateOfBirth + "\n" +
+                "Number " + telNumber + "\n" +
+                "Password " + password + "\n" +
+                "License " + license + "\n";
     }
 }

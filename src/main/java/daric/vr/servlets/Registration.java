@@ -29,14 +29,19 @@ public class Registration extends HttpServlet {
         user.setDateOfBirth(LocalDate.parse(req.getParameter("date"), DateTimeFormatter.ISO_LOCAL_DATE));
         user.setPassword(req.getParameter("password"));
 
-        System.out.println(user);
+        if(service.getUserByMail(user.getMail())==null){
+            User addedUser = service.addUser(user);
+            HttpSession session = req.getSession();
+            session.setAttribute("mail", addedUser.getMail());
 
-        User addedUser = service.addUser(user);
-        System.out.println(addedUser);
-        HttpSession session = req.getSession();
-        session.setAttribute("mail", addedUser.getMail());
+            RequestDispatcher dispatcher = req.getRequestDispatcher("registration.jsp");
+            dispatcher.forward(req, resp);
+        }else{
+            req.setAttribute("error", "E-mail already exists");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("registration.jsp");
+            dispatcher.include(req,resp);
+        }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("registration.jsp");
-        dispatcher.forward(req, resp);
+
     }
 }

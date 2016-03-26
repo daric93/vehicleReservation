@@ -11,6 +11,13 @@
     <title>Registration</title>
 </head>
 <body>
-Registration successful, <%=session.getAttribute("mail")%>
+<% Object error = session.getAttribute("error");
+    if (error != null) {
+        out.println("Registration successful, " + session.getAttribute("mail"));
+    } else {
+        out.println("Registration failed, " + error);
+    }
+%>
+
 </body>
 </html>

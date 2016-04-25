@@ -27,7 +27,7 @@ public class Car {
     private CarType carType;
 
     @Column(name = "ACTIVE", nullable = false)
-    private boolean state;
+    private boolean active;
 
     @Column(name = "ADDRESS", nullable = false)
     private String address;
@@ -73,12 +73,12 @@ public class Car {
         this.carType = carType;
     }
 
-    public boolean isState() {
-        return state;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setState(boolean state) {
-        this.state = state;
+    public void setActive(boolean state) {
+        this.active = state;
     }
 
     public String getAddress() {

@@ -27,11 +27,11 @@ public class LogIn extends HttpServlet {
         if (user != null && Objects.equals(user.getPassword(), pass)) {
             HttpSession session = req.getSession();
             session.setAttribute("mail", mail);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("logged.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("bsHome.jsp");
             dispatcher.forward(req, resp);
         } else {
             req.setAttribute("error", "Wrong username or password");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("logIn.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("bsLoginForm.jsp");
             dispatcher.include(req, resp);
         }
     }

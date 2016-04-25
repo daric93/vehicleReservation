@@ -34,11 +34,11 @@ public class Registration extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("mail", addedUser.getMail());
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("registration.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("bsRegistrationMessage.jsp");
             dispatcher.forward(req, resp);
         }else{
             req.setAttribute("error", "E-mail already exists");
-            RequestDispatcher dispatcher = req.getRequestDispatcher("registration.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("bsRegistrationMessage.jsp");
             dispatcher.include(req,resp);
         }
 

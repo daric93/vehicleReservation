@@ -3,6 +3,7 @@ package daric.vr.services;
 import daric.vr.entities.Car;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
@@ -49,7 +50,16 @@ public class CarService {
     }
 
     @GET
-    public List getCarByAddress(@QueryParam("address") String address){
-        return em.createNamedQuery("Car.getByAddress").setParameter("address",address).getResultList();
+    @SuppressWarnings("unchecked")
+    public List<Car> getCarByAddress(@QueryParam("address") String address) {
+        EntityGraph entityGraph = em.createEntityGraph("graph.Car.carTypes");
+        return (List<Car>) em.createNamedQuery("Car.getByAddress").setParameter("address", address).setHint("javax.persistence.fetchgraph", entityGraph).getResultList();
+    }
+
+    @GET
+    @SuppressWarnings("unchecked")
+    public List<Car> getAllCars() {
+        EntityGraph graph = em.createEntityGraph("graph.Car.carTypes");
+        return em.createNamedQuery("Car.getAllCars").setHint("javax.persistence.fetchgraph", graph).getResultList();
     }
 }

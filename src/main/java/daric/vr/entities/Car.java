@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-
-@NamedQuery(name = "Car.getByAddress", query = "select c from Car c where c.address like :address")
+@NamedQueries({
+        @NamedQuery(name = "Car.getByAddress", query = "select c from Car c where c.address like :address"),
+        @NamedQuery(name = "Car.getAllCars", query = "select c from Car c")
+})
+@NamedEntityGraph(name = "graph.Car.carTypes", attributeNodes = @NamedAttributeNode("carType"))
 
 @Table(name = "CAR")
 public class Car {

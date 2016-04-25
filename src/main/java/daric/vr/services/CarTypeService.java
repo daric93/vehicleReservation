@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.IOException;
 import java.util.List;
 
 @Stateless
@@ -35,7 +36,8 @@ public class CarTypeService {
     }
 
     @GET
-    public List getAll() {
+    @SuppressWarnings("unchecked")
+    public List<CarType> getAll() {
         return em.createNamedQuery("selectAllCarType").getResultList();
     }
 
@@ -43,6 +45,13 @@ public class CarTypeService {
     @Consumes(MediaType.APPLICATION_JSON)
     public CarType updateCarType(CarType carType) {
         return em.merge(carType);
+    }
+
+    @GET
+    @Path("fetchImg/{id}")
+    @Produces({"image/jpg", "image/png"})
+    public byte[] fetchImg(@PathParam("id") int id) throws IOException {
+        return (byte[]) em.createNamedQuery("getImgById").setParameter("id", id).getSingleResult();
     }
 
 }

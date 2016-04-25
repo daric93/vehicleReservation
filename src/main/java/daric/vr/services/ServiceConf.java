@@ -16,6 +16,7 @@ public class ServiceConf extends Application{
         resources.add(CarTypeService.class);
         resources.add(CarService.class);
         resources.add(UserService.class);
+        resources.add(UploadImages.class);
         return resources;
     }
 }

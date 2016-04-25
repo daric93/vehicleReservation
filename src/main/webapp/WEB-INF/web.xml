@@ -20,6 +20,8 @@
     <servlet-name>LogOut</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+
+  <servlet>
     <servlet-name>Registration</servlet-name>
     <servlet-class>daric.vr.servlets.Registration</servlet-class>
   </servlet>
@@ -27,6 +29,17 @@
     <servlet-name>Registration</servlet-name>
     <url-pattern>/registration</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Search</servlet-name>
+    <servlet-class>daric.vr.servlets.Search</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Search</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+
+
 
   <session-config>
     <session-timeout>10</session-timeout>

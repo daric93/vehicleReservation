@@ -5,7 +5,10 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQuery(name = "selectAllCarType", query = "select c from CarType c")
+@NamedQueries({
+        @NamedQuery(name = "selectAllCarType", query = "select c from CarType c"),
+        @NamedQuery(name = "getImgById", query = "select c.img from CarType c where c.typeId= :id")
+})
 @Entity
 @Table(name = "CAR_TYPE")
 public class CarType {
@@ -30,6 +33,7 @@ public class CarType {
     private String transmissionType;
 
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(name = "IMAGE")
     private byte[] img;
 

@@ -7,8 +7,9 @@ import java.util.List;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Car.getByAddress", query = "select c from Car c where c.address like :address"),
-        @NamedQuery(name = "Car.getAllCars", query = "select c from Car c")
+        @NamedQuery(name = "Car.getAllCars", query = "select c from Car c"),
+        @NamedQuery(name = "Car.getByParameters",
+                query = "select car from Car car where car.carId not in (select orders.carId from Order orders where orders.startDate < :end and orders.endDate > :start) and car.address = :city_up")
 })
 @NamedEntityGraph(name = "graph.Car.carTypes", attributeNodes = @NamedAttributeNode("carType"))
 

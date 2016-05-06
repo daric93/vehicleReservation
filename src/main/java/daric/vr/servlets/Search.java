@@ -1,7 +1,6 @@
 package daric.vr.servlets;
 
 import daric.vr.entities.Car;
-import daric.vr.entities.CarType;
 import daric.vr.services.CarService;
 
 import javax.ejb.EJB;
@@ -11,9 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class Search extends HttpServlet {
     @EJB
@@ -21,9 +22,15 @@ public class Search extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("city-up") != null) {
-            String city_up = req.getParameter("city-up");
-            List<Car> cars = service.getCarByAddress(city_up);
+        if (req.getParameter("city_up") != null) {
+            System.out.println(req.getParameter("pick_up"));
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            List<Car> cars = null;
+            try {
+                cars = service.getCars(req.getParameter("city_up"), dateFormat.parse(req.getParameter("pick_up")), dateFormat.parse(req.getParameter("drop_off")));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             req.setAttribute("cars", cars);
             RequestDispatcher dispatcher = req.getRequestDispatcher("SearchPage.jsp");
             dispatcher.forward(req, resp);

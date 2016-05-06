@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -19,7 +20,7 @@ public class CarService {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Car addCar(Car Car){
+    public Car addCar(Car Car) {
         return em.merge(Car);
     }
 
@@ -32,12 +33,12 @@ public class CarService {
     @GET
     @Path("{id}")
     public Car getCar(@PathParam("id") int id) {
-            return em.find(Car.class, id);
+        return em.find(Car.class, id);
     }
 
     @GET
     @Path("orders/{id}")
-    public Car getCarOrders(@PathParam("id") int id){
+    public Car getCarOrders(@PathParam("id") int id) {
         Car car = em.find(Car.class, id);
         car.getOrders();
         return car;
@@ -51,15 +52,16 @@ public class CarService {
 
     @GET
     @SuppressWarnings("unchecked")
-    public List<Car> getCarByAddress(@QueryParam("address") String address) {
-        EntityGraph entityGraph = em.createEntityGraph("graph.Car.carTypes");
-        return (List<Car>) em.createNamedQuery("Car.getByAddress").setParameter("address", address).setHint("javax.persistence.fetchgraph", entityGraph).getResultList();
-    }
-
-    @GET
-    @SuppressWarnings("unchecked")
     public List<Car> getAllCars() {
         EntityGraph graph = em.createEntityGraph("graph.Car.carTypes");
         return em.createNamedQuery("Car.getAllCars").setHint("javax.persistence.fetchgraph", graph).getResultList();
+    }
+
+    @GET
+    @Path("search/")
+    @SuppressWarnings("unchecked")
+    public List<Car> getCars(@QueryParam("city_up") String city,@QueryParam("start") Date start, @QueryParam("end") Date end) {
+        EntityGraph graph = em.createEntityGraph("graph.Car.carTypes");
+        return em.createNamedQuery("Car.getByParameters").setParameter("city_up",city).setParameter("start", start).setParameter("end", end).setHint("javax.persistence.fetchgraph", graph).getResultList();
     }
 }

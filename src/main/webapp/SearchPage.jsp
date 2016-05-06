@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label for="datetimepicker1">Pick-up date:</label>
                             <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" name="pickup"/>
+                                <input type='text' class="form-control" name="pickup" required/>
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -50,7 +50,7 @@
                         <div class="form-group">
                             <label for="datetimepicker2">Drop-off date:</label>
                             <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control" name="dropoff"/>
+                                <input type='text' class="form-control" name="dropoff" required/>
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
             </span>

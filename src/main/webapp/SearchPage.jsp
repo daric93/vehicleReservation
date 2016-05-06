@@ -15,7 +15,7 @@
                 <div class="row-fluid">
                     <div class="col-sm-6">
                         <label for="sel1">Pick-up:</label>
-                        <select class="form-control" id="sel1" name="city-up" required>
+                        <select class="form-control" id="sel1" name="city_up" required>
                             <option>Kharkiv</option>
                             <option>Kiev</option>
                             <option>Lvov</option>
@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label for="datetimepicker1">Pick-up date:</label>
                             <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" name="pickup" required/>
+                                <input type='text' class="form-control" name="pick_up" required/>
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -34,13 +34,15 @@
 
                         <script type="text/javascript">
                             $(function () {
-                                $('#datetimepicker1').datetimepicker();
+                                $('#datetimepicker1').datetimepicker({
+                                    format: 'YYYY-MM-DD HH:mm'
+                                });
                             });
                         </script>
                     </div>
                     <div class="col-sm-6">
                         <label for="sel2">Drop-off:</label>
-                        <select class="form-control" id="sel2" name="city-off">
+                        <select class="form-control" id="sel2" name="city_off">
                             <option>Kharkiv</option>
                             <option>Kiev</option>
                             <option>Lvov</option>
@@ -50,7 +52,7 @@
                         <div class="form-group">
                             <label for="datetimepicker2">Drop-off date:</label>
                             <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control" name="dropoff" required/>
+                                <input type='text' class="form-control" name="drop_off" required/>
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -59,7 +61,9 @@
 
                         <script type="text/javascript">
                             $(function () {
-                                $('#datetimepicker2').datetimepicker();
+                                $('#datetimepicker2').datetimepicker({
+                                    format: 'YYYY-MM-DD HH:mm'
+                                });
                             });
                         </script>
                     </div>

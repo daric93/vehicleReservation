@@ -14,8 +14,8 @@
             <form role="form" method="get" action="search">
                 <div class="row-fluid">
                     <div class="col-sm-6">
-                        <label for="sel1">Pick-up:</label>
-                        <select class="form-control" id="sel1" name="city_up" required>
+                        <label for="city_up">Pick-up:</label>
+                        <select class="form-control" id="city_up" name="city_up" required>
                             <option>Kharkiv</option>
                             <option>Kiev</option>
                             <option>Lvov</option>
@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label for="datetimepicker1">Pick-up date:</label>
                             <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" name="pick_up" required/>
+                                <input type='text' class="form-control" name="pick_up" id="pick_up_date" required/>
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -41,8 +41,8 @@
                         </script>
                     </div>
                     <div class="col-sm-6">
-                        <label for="sel2">Drop-off:</label>
-                        <select class="form-control" id="sel2" name="city_off">
+                        <label for="city_off">Drop-off:</label>
+                        <select class="form-control" id="city_off" name="city_off">
                             <option>Kharkiv</option>
                             <option>Kiev</option>
                             <option>Lvov</option>
@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <label for="datetimepicker2">Drop-off date:</label>
                             <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control" name="drop_off" required/>
+                                <input type='text' class="form-control" name="drop_off" id="drop_off_date" required/>
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -78,7 +78,7 @@
                         <option>Minivan</option>
                     </select>
                 </div>
-                <button type="submit" name="submit">Submit</button>
+                <button type="submit" name="submit">Search</button>
             </form>
         </div>
         <div class="col-sm-8">
@@ -107,6 +107,7 @@
                 <p>
                     Address <%=car.getAddress()%>
                 </p>
+                <input type="button" id="book" value="Book">
             </div>
             <%
                         }
@@ -117,5 +118,11 @@
     </div>
 </div>
 <%@include file="html/footer" %>
+<script>
+    document.getElementById("city_up").value = "<%=request.getParameter("city_up")%>";
+    document.getElementById("city_off").value = "<%=request.getParameter("city_off")%>";
+    document.getElementById("pick_up_date").value = "<%=request.getParameter("pick_up")%>";
+    document.getElementById("drop_off_date").value = "<%=request.getParameter("drop_off")%>";
+</script>
 </body>
 </html>

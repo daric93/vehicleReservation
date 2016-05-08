@@ -1,6 +1,8 @@
 package daric.vr.services;
 
 import daric.vr.entities.Car;
+import daric.vr.entities.Order;
+import daric.vr.entities.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityGraph;
@@ -60,8 +62,12 @@ public class CarService {
     @GET
     @Path("search/")
     @SuppressWarnings("unchecked")
-    public List<Car> getCars(@QueryParam("city_up") String city,@QueryParam("start") Date start, @QueryParam("end") Date end) {
+    public List<Car> getCars(@QueryParam("city_up") String city, @QueryParam("start") Date start, @QueryParam("end") Date end) {
         EntityGraph graph = em.createEntityGraph("graph.Car.carTypes");
-        return em.createNamedQuery("Car.getByParameters").setParameter("city_up",city).setParameter("start", start).setParameter("end", end).setHint("javax.persistence.fetchgraph", graph).getResultList();
+        return em.createNamedQuery("Car.getByParameters").setParameter("city_up", city).setParameter("start", start).setParameter("end", end).setHint("javax.persistence.fetchgraph", graph).getResultList();
+    }
+
+    public Car getCarRef(int id) {
+        return em.getReference(Car.class, id);
     }
 }

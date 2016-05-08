@@ -4,19 +4,23 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NamedQuery(name = "Order.getOrderWithCar", query = "select o from Order o where o.orderId = :id")
+@NamedEntityGraph(name = "graph.Order.carId",
+        attributeNodes = @NamedAttributeNode(value = "carId", subgraph = "carTypeGraph"),
+        subgraphs = @NamedSubgraph(name = "carTypeGraph", attributeNodes = @NamedAttributeNode(value = "carType")))
 @Table(name = "CAR_ORDER")
 public class Order {
     @Id
     @GeneratedValue
-    @Column (name = "ORDER_ID")
+    @Column(name = "ORDER_ID")
     private int orderId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USER_ID", nullable = false)
     private User userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CAR_ID")
+    @JoinColumn(name = "CAR_ID", nullable = false)
     private Car carId;
 
     @Column(name = "START_DATE", nullable = false)
@@ -30,6 +34,9 @@ public class Order {
 
     @Column(name = "PAYMENT_RECEIVD", nullable = false)
     private boolean paymentReceived;
+
+    @Column(name = "TOTAL_PRICE", nullable = false)
+    private int totalPrice;
 
     public int getOrderId() {
         return orderId;
@@ -85,5 +92,13 @@ public class Order {
 
     public void setPaymentReceived(boolean paymentReceived) {
         this.paymentReceived = paymentReceived;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

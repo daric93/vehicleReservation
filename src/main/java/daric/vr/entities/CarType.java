@@ -32,6 +32,9 @@ public class CarType {
     @Column(name = "TRANSMISSION_TYPE", length = 20, nullable = false)
     private String transmissionType;
 
+    @Column(name = "PRICE", length = 10, nullable = false)
+    private int price;
+
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(name = "IMAGE")
@@ -91,6 +94,14 @@ public class CarType {
 
     public void setTransmissionType(String transmissionType) {
         this.transmissionType = transmissionType;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public byte[] getImg() {

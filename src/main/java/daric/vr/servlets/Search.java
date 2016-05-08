@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class Search extends HttpServlet {
@@ -23,7 +22,6 @@ public class Search extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getParameter("city_up") != null) {
-            System.out.println(req.getParameter("pick_up"));
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             List<Car> cars = null;
             try {

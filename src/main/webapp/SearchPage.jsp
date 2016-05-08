@@ -1,5 +1,6 @@
 <%@ page import="daric.vr.entities.Car" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.time.Duration" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,7 +12,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-4">
-            <form role="form" method="get" action="search">
+            <form role="form" method="get" action="search" name="params">
                 <div class="row-fluid">
                     <div class="col-sm-6">
                         <label for="city_up">Pick-up:</label>
@@ -90,24 +91,29 @@
             for (Car car : cars) {
         %>
             <div class="well">
-                <p>
-                    <img src="services/carType/fetchImg/<%=car.getCarType().getTypeId()%>">
-                </p>
-                <p>
-                    Brand <%=car.getCarType().getBrand()%>
-                    Model <%=car.getCarType().getModel()%>
-                </p>
-                <p>
-                    Seats <%=car.getCarType().getSeats()%>
-                    TrunkVolume <%=car.getCarType().getTrunkVolume()%>
-                </p>
-                <p>
-                    Color <%=car.getColor()%>   TransmissionType <%=car.getCarType().getTransmissionType()%>
-                </p>
-                <p>
-                    Address <%=car.getAddress()%>
-                </p>
-                <input type="button" id="book" value="Book">
+                <form onsubmit="bookCar()" name="car" method="post" action="reserve">
+                    <p>
+                        <img src="services/carType/fetchImg/<%=car.getCarType().getTypeId()%>">
+                    </p>
+                    <p>
+                        Brand <%=car.getCarType().getBrand()%>
+                        Model <%=car.getCarType().getModel()%>
+                    </p>
+                    <p>
+                        Seats <%=car.getCarType().getSeats()%>
+                        TrunkVolume <%=car.getCarType().getTrunkVolume()%>
+                    </p>
+                    <p>
+                        Color <%=car.getColor()%>   TransmissionType <%=car.getCarType().getTransmissionType()%>
+                    </p>
+                    <p>
+                        Address <%=car.getAddress()%>
+                        Price per hour <%=car.getCarType().getPrice()%>
+                    </p>
+                    <input type="hidden" name="id" value="<%=car.getCarId()%>">
+                    <input type="hidden" name="price" value="<%=car.getCarType().getPrice()%>">
+                    <input type="submit" value="Reserve">
+                </form>
             </div>
             <%
                         }
@@ -123,6 +129,22 @@
     document.getElementById("city_off").value = "<%=request.getParameter("city_off")%>";
     document.getElementById("pick_up_date").value = "<%=request.getParameter("pick_up")%>";
     document.getElementById("drop_off_date").value = "<%=request.getParameter("drop_off")%>";
+
+    function addHidden(theForm, key, value) {
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+        theForm.appendChild(input);
+    }
+
+    function bookCar() {
+        var node = document.forms.namedItem("car");
+        addHidden(node, 'city_up', document.getElementById("city_up").value);
+        addHidden(node, 'city_off', document.getElementById("city_off").value);
+        addHidden(node, 'pick_up', document.getElementById("pick_up_date").value);
+        addHidden(node, 'drop_off', document.getElementById("drop_off_date").value);
+    }
 </script>
 </body>
 </html>

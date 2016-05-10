@@ -57,6 +57,15 @@
     <url-pattern>/showOrder</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>Orders</servlet-name>
+    <servlet-class>daric.vr.servlets.Orders</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Orders</servlet-name>
+    <url-pattern>/orders</url-pattern>
+  </servlet-mapping>
+
 
   <session-config>
     <session-timeout>10</session-timeout>

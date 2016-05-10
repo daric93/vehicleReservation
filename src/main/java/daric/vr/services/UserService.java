@@ -3,6 +3,7 @@ package daric.vr.services;
 import daric.vr.entities.User;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -37,8 +38,12 @@ public class UserService {
     @GET
     @Path("{username}")
     public User getUserByMail(@PathParam("mail") String mail) {
+        EntityGraph graph = em.createEntityGraph("graph.User.getOrders");
+
         try {
-            return (User) em.createNamedQuery("getUserByMail").setParameter("mail", mail).getSingleResult();
+            return (User) em.createNamedQuery("getUserByMail").
+                    setParameter("mail", mail).setHint("javax.persistence.fetchgraph", graph).
+                    getSingleResult();
         } catch (NoResultException e) {
             return null;
         }

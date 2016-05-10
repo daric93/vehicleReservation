@@ -19,7 +19,7 @@
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                 <span class="glyphicon glyphicon-user"></span></button>
             <ul class="dropdown-menu">
-                <li><a href="#">Orders</a></li>
+                <li><a href="orders">Orders</a></li>
                 <li><a href="logout">Log Out</a></li>
             </ul>
         </div>

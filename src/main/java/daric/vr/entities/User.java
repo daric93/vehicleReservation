@@ -7,6 +7,7 @@ import java.util.List;
 
 @Entity
 @NamedQuery(name = "getUserByMail", query = "select user from User user where user.mail like :mail")
+@NamedEntityGraph(name = "graph.User.getOrders", attributeNodes = @NamedAttributeNode(value = "orders"))
 @Table(name = "USER")
 public class User {
     @Id

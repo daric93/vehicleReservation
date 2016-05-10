@@ -17,10 +17,13 @@ public class ShowOrder extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Order unpaidOrder = orderService.getOrderWithCar((int) req.getAttribute("order"));
-        req.setAttribute("order", unpaidOrder);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("showOrder.jsp");
-        dispatcher.forward(req, resp);
-
+        Object attribute = req.getAttribute("order");
+        if (attribute != null) {
+            Order order = orderService.getOrderWithCar((int) attribute);
+            req.setAttribute("order", order);
+        } else {
+            RequestDispatcher dispatcher = req.getRequestDispatcher("showOrder.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 }

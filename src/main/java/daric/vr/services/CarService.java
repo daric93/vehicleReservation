@@ -1,12 +1,11 @@
 package daric.vr.services;
 
 import daric.vr.entities.Car;
-import daric.vr.entities.Order;
-import daric.vr.entities.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -62,9 +61,19 @@ public class CarService {
     @GET
     @Path("search/")
     @SuppressWarnings("unchecked")
-    public List<Car> getCars(@QueryParam("city_up") String city, @QueryParam("start") Date start, @QueryParam("end") Date end) {
+    public List<Car> getCars(@QueryParam("city_up") String city, @QueryParam("startDate") Date start, @QueryParam("endDate") Date end) {
         EntityGraph graph = em.createEntityGraph("graph.Car.carTypes");
-        return em.createNamedQuery("Car.getByParameters").setParameter("city_up", city).setParameter("start", start).setParameter("end", end).setHint("javax.persistence.fetchgraph", graph).getResultList();
+        return em.createNamedQuery("Car.getByParameters").setParameter("city_up", city).setParameter("startDate", start).setParameter("endDate", end).setHint("javax.persistence.fetchgraph", graph).getResultList();
+    }
+
+    @GET
+    @Path("check/{id}")
+    public Car checkDate(@PathParam("id") int id, @QueryParam("startDate") Date start, @QueryParam("endDate") Date end) {
+        try {
+            return (Car) em.createNamedQuery("Car.checkDate").setParameter("id", id).setParameter("startDate", start).setParameter("endDate", end).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     public Car getCarRef(int id) {

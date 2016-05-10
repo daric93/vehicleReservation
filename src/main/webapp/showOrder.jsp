@@ -10,6 +10,7 @@
 <div class="container-fluid">
     <%
         Order order = (Order) request.getAttribute("order");
+        if (order != null) {
     %>
     <div class="row">
         <div class="col-sm-6">
@@ -48,7 +49,11 @@
             </form>
             <%
                 }
-            %>
+            } else {
+            %><p><%=request.getAttribute("error")%>
+        </p><%
+            }
+        %>
 
         </div>
     </div>

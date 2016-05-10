@@ -17,7 +17,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class Reserve extends HttpServlet {
     @EJB
@@ -40,16 +39,16 @@ public class Reserve extends HttpServlet {
                 Date drop_off = dateFormat.parse(req.getParameter("drop_off"));
                 order.setStartDate(pick_up);
                 order.setEndDate(drop_off);
-                long duration = drop_off.getTime() - pick_up.getTime();
-                long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-                order.setTotalPrice((int) (Integer.parseInt(req.getParameter("price"))/60 * diffInMinutes));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             order.setOrderDate(new Date());
             order.setPaymentReceived(false);
             Order order1 = orderService.addOrder(order);
-            req.setAttribute("order", order1.getOrderId());
+            if (order1 != null)
+                req.setAttribute("order", order1.getOrderId());
+            else
+                req.setAttribute("error", "These dates are not available already");
             RequestDispatcher dispatcher = req.getRequestDispatcher("showOrder");
             dispatcher.forward(req, resp);
         } else {

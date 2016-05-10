@@ -36,7 +36,7 @@ public class User {
     @Column(name = "LICENSE", length = 50)
     private String license;
 
-    @OneToMany(mappedBy = "userId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
     public List<Order> getOrders() {

@@ -14,19 +14,19 @@
     %>
     <div class="row">
         <div class="col-sm-6">
-            <p><%=order.getCarId().getCarType().getImg()%>
+            <p><%=order.getCar().getCarType().getImg()%>
             </p>
-            <p>Model: <%=order.getCarId().getCarType().getModel()%>
+            <p>Model: <%=order.getCar().getCarType().getModel()%>
             </p>
-            <p>Brand: <%=order.getCarId().getCarType().getBrand()%>
+            <p>Brand: <%=order.getCar().getCarType().getBrand()%>
             </p>
-            <p>Seats: <%=order.getCarId().getCarType().getSeats()%>
+            <p>Seats: <%=order.getCar().getCarType().getSeats()%>
             </p>
-            <p>Transmission Type: <%=order.getCarId().getCarType().getTransmissionType()%>
+            <p>Transmission Type: <%=order.getCar().getCarType().getTransmissionType()%>
             </p>
-            <p>Trunk Volume: <%=order.getCarId().getCarType().getTrunkVolume()%>
+            <p>Trunk Volume: <%=order.getCar().getCarType().getTrunkVolume()%>
             </p>
-            <p>Price per hour: <%=order.getCarId().getCarType().getPrice()%>
+            <p>Price per hour: <%=order.getCar().getCarType().getPrice()%>
             </p>
         </div>
         <div class="col-sm-6">

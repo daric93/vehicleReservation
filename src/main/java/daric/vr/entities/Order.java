@@ -17,11 +17,11 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", nullable = false)
-    private User userId;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CAR_ID", nullable = false)
-    private Car carId;
+    private Car car;
 
     @Column(name = "START_DATE", nullable = false)
     private Date startDate;
@@ -46,20 +46,20 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Car getCarId() {
-        return carId;
+    public Car getCar() {
+        return car;
     }
 
-    public void setCarId(Car carId) {
-        this.carId = carId;
+    public void setCar(Car carId) {
+        this.car = carId;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User userId) {
+        this.user = userId;
     }
 
     public Date getStartDate() {

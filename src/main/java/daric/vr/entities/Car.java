@@ -9,7 +9,7 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "Car.getAllCars", query = "select c from Car c where c.active = true "),
         @NamedQuery(name = "Car.getByParameters",
-                query = "select car from Car car where car.carId not in (select orders.carId from Order orders where orders.startDate < :endDate and orders.endDate > :startDate) and car.address = :city_up and car.active = true "),
+                query = "select car from Car car where car.carId not in (select orders.car from Order orders where orders.startDate < :endDate and orders.endDate > :startDate) and car.address = :city_up and car.active = true "),
         @NamedQuery(name = "Car.checkDate", query = "select car from Car car where car.carId = :id and not exists (select o from car.orders o where o.startDate < :endDate and o.endDate > :startDate)")
 })
 @NamedEntityGraph(name = "graph.Car.carTypes", attributeNodes = @NamedAttributeNode("carType"))
@@ -37,7 +37,7 @@ public class Car {
     @Column(name = "ADDRESS", nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "carId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
     @XmlTransient

@@ -26,7 +26,7 @@ public class OrderService {
     public Order addOrder(Order order) {
         long duration = order.getEndDate().getTime() - order.getStartDate().getTime();
         long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-        Car car = carService.checkDate(order.getCarId().getCarId(), order.getStartDate(), order.getEndDate());
+        Car car = carService.checkDate(order.getCar().getCarId(), order.getStartDate(), order.getEndDate());
         if (car != null) {
             double price = car.getCarType().getPrice();
             order.setTotalPrice(price / 60 * diffInMinutes);

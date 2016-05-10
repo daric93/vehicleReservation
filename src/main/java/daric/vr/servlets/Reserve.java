@@ -32,8 +32,8 @@ public class Reserve extends HttpServlet {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Order order = new Order();
             Car car = carService.getCarRef(Integer.parseInt(req.getParameter("id")));
-            order.setCarId(car);
-            order.setUserId(userService.getUserByMail((String) req.getSession().getAttribute("mail")));
+            order.setCar(car);
+            order.setUser(userService.getUserByMail((String) req.getSession().getAttribute("mail")));
             try {
                 Date pick_up = dateFormat.parse(req.getParameter("pick_up"));
                 Date drop_off = dateFormat.parse(req.getParameter("drop_off"));

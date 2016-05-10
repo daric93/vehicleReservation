@@ -36,7 +36,7 @@ public class Order {
     private boolean paymentReceived;
 
     @Column(name = "TOTAL_PRICE", nullable = false)
-    private int totalPrice;
+    private double totalPrice;
 
     public int getOrderId() {
         return orderId;
@@ -94,11 +94,11 @@ public class Order {
         this.paymentReceived = paymentReceived;
     }
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 }

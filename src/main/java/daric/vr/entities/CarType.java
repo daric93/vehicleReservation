@@ -33,7 +33,7 @@ public class CarType {
     private String transmissionType;
 
     @Column(name = "PRICE", length = 10, nullable = false)
-    private int price;
+    private double price;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
@@ -96,11 +96,11 @@ public class CarType {
         this.transmissionType = transmissionType;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

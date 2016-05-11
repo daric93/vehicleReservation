@@ -5,8 +5,8 @@ import java.util.Date;
 
 @Entity
 @NamedQuery(name = "Order.getOrderWithCar", query = "select o from Order o where o.orderId = :id")
-@NamedEntityGraph(name = "graph.Order.carId",
-        attributeNodes = @NamedAttributeNode(value = "carId", subgraph = "carTypeGraph"),
+@NamedEntityGraph(name = "graph.Order.car",
+        attributeNodes = @NamedAttributeNode(value = "car", subgraph = "carTypeGraph"),
         subgraphs = @NamedSubgraph(name = "carTypeGraph", attributeNodes = @NamedAttributeNode(value = "carType")))
 @Table(name = "CAR_ORDER")
 public class Order {
@@ -50,16 +50,16 @@ public class Order {
         return car;
     }
 
-    public void setCar(Car carId) {
-        this.car = carId;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public User getUser() {
         return user;
     }
 
-    public void setUser(User userId) {
-        this.user = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getStartDate() {

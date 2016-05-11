@@ -1,6 +1,5 @@
 package daric.vr.servlets;
 
-import daric.vr.entities.Car;
 import daric.vr.entities.Order;
 import daric.vr.services.CarService;
 import daric.vr.services.OrderService;
@@ -31,8 +30,8 @@ public class Reserve extends HttpServlet {
         if (req.getSession().getAttribute("mail") != null) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Order order = new Order();
-            Car car = carService.getCarRef(Integer.parseInt(req.getParameter("id")));
-            order.setCar(car);
+            // Car car = carService.getCarRef(Integer.parseInt(req.getParameter("id")));
+            //order.setCar(car);
             order.setUser(userService.getUserByMail((String) req.getSession().getAttribute("mail")));
             try {
                 Date pick_up = dateFormat.parse(req.getParameter("pick_up"));
@@ -44,9 +43,9 @@ public class Reserve extends HttpServlet {
             }
             order.setOrderDate(new Date());
             order.setPaymentReceived(false);
-            Order order1 = orderService.addOrder(order);
-            if (order1 != null)
-                req.setAttribute("order", order1.getOrderId());
+            order = orderService.addOrder(Integer.parseInt(req.getParameter("id")), order);
+            if (order != null)
+                req.setAttribute("order", order.getOrderId());
             else
                 req.setAttribute("error", "These dates are not available already");
             RequestDispatcher dispatcher = req.getRequestDispatcher("showOrder");

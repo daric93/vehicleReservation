@@ -1,5 +1,5 @@
-<%@ page import="daric.vr.entities.User" %>
 <%@ page import="daric.vr.entities.Order" %>
+<%@ page import="daric.vr.entities.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -28,29 +28,40 @@
         </thead>
         <tbody>
         <%
-            for(Order order: user.getOrders()){
+            for (Order order : user.getOrders()) {
         %>
-        <tr>
-            <th><%=order.getOrderId()%>
-            </th>
-            <th><%=order.getStartDate()%>
-            </th>
-            <th><%=order.getEndDate()%>
-            </th>
-            <th><%=order.getTotalPrice()%>
-            </th>
-            <th><%
+        <tr onclick="getElements(this)">
+            <td id="id"><%=order.getOrderId()%>
+            </td>
+            <td><%=order.getStartDate()%>
+            </td>
+            <td><%=order.getEndDate()%>
+            </td>
+            <td><%=order.getTotalPrice()%>
+            </td>
+            <td><%
                 if (order.isPaymentReceived()) { %>Received
                 <%
                 } else {%>Unpaid<%}%>
-            </th>
+            </td>
         </tr>
         <%
-                            };
+            }
+            ;
         %>
         </tbody>
     </table>
+    <form name="myForm" action="showOrder" method="post">
+        <input type="text" name="order" hidden>
+    </form>
 </div>
 <%@include file="html/footer" %>
 </body>
+<script>
+    function getElements(row) {
+        document.myForm.order.value = row.cells[0].innerText;
+        document.myForm.submit();
+    }
+
+</script>
 </html>

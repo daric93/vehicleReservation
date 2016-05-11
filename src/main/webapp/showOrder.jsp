@@ -44,8 +44,14 @@
             <%
                 if (!order.isPaymentReceived()) {
             %>
-            <form action="">
+            <form action="" method="">
                 <input type="submit" value="Pay">
+            </form>
+            <form action="" method="">
+                <input type="submit" value="Change dates">
+            </form>
+            <form action="" method="">
+                <input type="submit" value="Cancel reservation">
             </form>
             <%
                 }

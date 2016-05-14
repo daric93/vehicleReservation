@@ -1,136 +1,16 @@
-<div class="container-fluid">
+<div class="container-fluid" id="mainPage">
     <div class="row">
         <div class="col-sm-4">
-
-            <form role="form" method="get" action="search">
-                <div class="row-fluid">
-                    <div class="col-sm-6">
-                        <label for="sel1">Pick-up:</label>
-                        <select class="form-control" id="sel1" name="city-up" required>
-                            <option>Kharkiv</option>
-                            <option>Kiev</option>
-                            <option>Lvov</option>
-                            <option>Odessa</option>
-                        </select>
-                        <br>
-                        <div class="form-group">
-                            <label for="datetimepicker1">Pick-up date:</label>
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" name="pickup" required/>
-            <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-                            </div>
-                        </div>
-
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#datetimepicker1').datetimepicker({
-                                    format: 'YYYY-MM-DD HH:mm'
-                                });
-                            });
-                        </script>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="sel2">Drop-off:</label>
-                        <select class="form-control" id="sel2" name="city-off">
-                            <option>Kharkiv</option>
-                            <option>Kiev</option>
-                            <option>Lvov</option>
-                            <option>Odessa</option>
-                        </select>
-                        <br>
-                        <div class="form-group">
-                            <label for="datetimepicker2">Drop-off date:</label>
-                            <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control" name="dropoff" required/>
-            <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-                            </div>
-                        </div>
-
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#datetimepicker2').datetimepicker({
-                                    format: 'YYYY-MM-DD HH:mm'
-                                });
-                            });
-                        </script>
-                    </div>
-                </div>
-                <p>Advanced options</p>
-                <div class="row-fluid">
-                    <div class="col-sm-12">
-                        <label for="type">Car type:</label>
-                        <select class="form-control" id="type" required>
-                            <option>None</option>
-                            <option>Compact</option>
-                            <option>Standard</option>
-                            <option>Minivan</option>
-                        </select>
-                    </div>
-                </div>
-                <br>
-                <button type="submit" name="submit">Submit</button>
-            </form>
+            <div class="wrapper" id="cont">
+            </div>
         </div>
         <div class="col-sm-8">
-
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque faucibus rhoncus congue. Mauris nec
-            sagittis leo, sed mattis turpis. Aliquam lacinia ornare maximus. Nam quis tristique orci. Aenean malesuada
-            sem et iaculis ornare. Aenean ut ligula nec dolor sollicitudin porttitor. Proin eu aliquam ante, quis
-            accumsan leo. Interdum et malesuada fames ac ante ipsum primis in faucibus. In et massa nec nisi consequat
-            dapibus sit amet ac tellus. Maecenas suscipit congue justo, quis egestas massa elementum sed.
-
-
-            In consectetur et tortor sit amet tempor. Cras vel metus quis lorem imperdiet placerat. Phasellus malesuada
-            auctor fringilla. Pellentesque vitae urna laoreet, accumsan ante id, ullamcorper lectus. Nullam in ante
-            semper, accumsan leo eget, vulputate est. Nullam vitae elit eget mauris consectetur ullamcorper eget nec
-            quam. Duis eu massa vel dolor lobortis tristique at ultrices elit. Duis imperdiet at nibh non fringilla.
-            Maecenas placerat quam et erat tempor, non tempor ligula convallis. Vestibulum quis vulputate sapien, vitae
-            gravida ligula.
-
-            Fusce sodales enim eget nibh sodales, vel mattis justo ornare. Nam vel lectus sollicitudin, aliquam lorem
-            ut, posuere augue. Morbi magna eros, finibus non rutrum eleifend, scelerisque eget massa. In sed quam
-            ullamcorper, aliquam nisl at, sollicitudin mauris. Nullam tellus turpis, rutrum id pretium eget, molestie at
-            felis. Nam dignissim turpis eu congue vulputate. Nam sodales diam ut sapien faucibus, ut iaculis augue
-            dapibus. Proin viverra consequat semper. Nam efficitur gravida tortor. Donec tristique erat quis auctor
-            fringilla. Cras sed finibus risus.
-
-            Suspendisse tincidunt scelerisque ultrices. Aenean leo mauris, pellentesque id suscipit quis, fermentum quis
-            sapien. In vel malesuada nunc. Proin sed mi purus. Cras tincidunt sed tellus vel condimentum. Nunc in
-            sodales purus, quis convallis velit. Phasellus tincidunt ut turpis eu sodales. Nunc at maximus ipsum.
-            Aliquam tellus felis, dapibus ac tellus et, vehicula condimentum dui. In ut mi nec purus tempus sagittis nec
-            eget ligula. Morbi nec auctor nulla. Donec euismod sem quis nulla mollis, tincidunt convallis enim
-            fringilla. Aenean molestie commodo viverra. Praesent orci urna, porttitor consectetur purus at, venenatis
-            maximus mauris.
-
-            Aenean volutpat, felis id venenatis dignissim, leo mauris pulvinar dolor, et laoreet quam ligula at tellus.
-            Suspendisse ante lectus, tempus quis semper ut, eleifend elementum elit. Morbi ultrices sem dui, nec
-            molestie nunc dignissim et. Quisque at ante sed ante porta maximus. Cum sociis natoque penatibus et magnis
-            dis parturient montes, nascetur ridiculus mus. Curabitur viverra accumsan interdum. Pellentesque habitant
-            morbi tristique senectus et netus et malesuada fames ac turpis egestas. Interdum et malesuada fames ac ante
-            ipsum primis in faucibus.
-
-            Aliquam eu elementum nisi. Pellentesque in diam cursus, dictum mauris sed, pretium eros. Pellentesque orci
-            est, maximus at urna a, vehicula fermentum mauris. Quisque sit amet sodales elit, quis pulvinar sem.
-            Suspendisse potenti. Cras vitae egestas nisi. Integer et risus vitae erat porta eleifend. Aenean augue
-            mauris, dapibus in leo posuere, malesuada efficitur libero. Nunc blandit urna quis ligula ultricies mattis.
-
-            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum
-            dignissim est velit, et imperdiet metus tincidunt non. Praesent justo purus, ullamcorper eu neque id,
-            lacinia facilisis nisi. Donec blandit orci sed ornare fringilla. Quisque at placerat justo. Quisque maximus,
-            mauris nec lacinia venenatis, lacus metus luctus massa, sed pharetra dolor orci a tellus. Nam ut velit
-            feugiat, pretium lacus sit amet, egestas neque. Duis venenatis erat in lacus finibus posuere at sed sapien.
-            Integer ut egestas lacus. Suspendisse facilisis nulla tellus, sit amet molestie odio interdum quis.
-
-            Sed vel molestie augue. Vestibulum ipsum tellus, efficitur non nulla at, vehicula lacinia justo. Nunc id
-            urna ligula. Vestibulum quis est ut nisi porttitor egestas in eu est. Phasellus eget nisl nunc. Cras lorem
-            erat, vestibulum nec elementum at, imperdiet a elit. Pellentesque nulla nunc, ullamcorper in porttitor nec,
-            auctor eu ante. Curabitur eget velit non ipsum ullamcorper pellentesque. Integer at quam in justo aliquet
-            gravida non at lectus.
+            <img src="html/bmw5_640x476.png" class="img-responsive-my" alt="Responsive image">
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $("#cont").load("html/searchBox.html");
+    });
+</script>

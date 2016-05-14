@@ -4,20 +4,90 @@
 }
 
 .page-header {
-    color: #cdbfe3;
+    color: darkorange;
     text-align: center;
-    background-color: #563d7c;
+    background-color: #3e3b46;
+    font-weight: bold;
     padding-bottom: 0px;
     margin: 0;
     border-bottom: none;
 }
 
 footer {
-    background-color: #f2f2f2;
+    background-color: #101010;
     padding: 25px;
+    font-size: x-small;
+    color: white;
 }
 
+/*
 .col-sm-4 {
     height: 100%;
-    background-color: #9d9d9d;
 }
+*/
+
+.img-responsive-my {
+    background: url(../html/bmw5_640x476.png) no-repeat center;
+    background-size: cover;
+    width: 75%;
+    height: 75%;
+}
+
+#mainPage{
+    background-color: #3e3b46;
+    padding: 3%;
+}
+
+#searchForm{
+    padding: 5%;
+    background-color: darkorange;
+    border: thin solid white;
+}
+#inf h3{
+    font-weight: bold;
+    font-size: small;
+}
+#inf h2{
+    color: darkorange;
+    font-weight: bold;
+    font-size: small;
+}
+#inf p{
+    font-size: small;
+}
+#refs li a{
+    color: darkorange;
+    font-weight: bold;
+}
+#refs li a:hover{
+    color: orangered;
+}
+#searchDiv{
+    background-color: #3e3b46;
+    padding-top: 3%;
+}
+
+.form-group{
+    padding-top: 3%;
+}
+
+.img-icons{
+    width: 18px;
+    height: 18px;
+    opacity: 0.5
+}
+.font-li-my{
+    font-size: small;
+    color: #262626;
+}
+
+.list-my li{
+    padding-top: 2%;
+}
+.car-brand{
+    font-weight: bold;
+    font-size: large;
+    padding-top: 5%;
+}
+
+

@@ -1,5 +1,18 @@
 <footer class="container-fluid text-center">
     <div class="container">
-        Footer
+        <div class="row">
+            <!--<div class="col-sm-4"></div>-->
+            <!--<div class="col-sm-4"></div>-->
+            <div class="col-sm-4 col-sm-offset-8 text-left">
+                <p style="font-weight: bold; color: #2b669a">Contacts:</p>
+                <address>
+                    <strong>CarReservation.com</strong><br>
+                    1355 Market Street, Suite 900<br>
+                    San Francisco, CA 94103<br>
+                    <a href="mailto:#">daric2612@gmail.com</a><br>
+                    <abbr title="Phone">P:</abbr> +38(096) 36-87-818
+                </address>
+            </div>
+        </div>
     </div>
 </footer>

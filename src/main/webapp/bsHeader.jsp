@@ -1,17 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-header">
-    <div class="container text-center">
-        <h1>My Portfolio</h1>
-        <p>Some text that represents "Me"...</p>
+    <div class="container text-right">
+        <h1 style="font-weight: bold;">CarReservation.com</h1>
+        <p>Book cars fast and easy</p>
     </div>
 </div>
 <nav class="navbar navbar-inverse">
     <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
             <li class="active"><a href="bsHome.jsp">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="search">Gallery</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="rentalInformation.jsp">Rental Information</a></li>
+            <li><a href="#">Vehicles</a></li>
+            <li><a href="#">Contacts</a></li>
         </ul>
 
         <% if (session.getAttribute("mail") != null) {%>

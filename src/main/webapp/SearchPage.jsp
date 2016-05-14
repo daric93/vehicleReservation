@@ -1,6 +1,5 @@
 <%@ page import="daric.vr.entities.Car" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.time.Duration" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,78 +8,12 @@
 </head>
 <body>
 <%@include file="bsHeader.jsp" %>
-<div class="container-fluid">
+<div class="container-fluid" id="searchDiv">
     <div class="row">
         <div class="col-sm-4">
-            <form role="form" method="get" action="search" name="params">
-                <div class="row-fluid">
-                    <div class="col-sm-6">
-                        <label for="city_up">Pick-up:</label>
-                        <select class="form-control" id="city_up" name="city_up" required>
-                            <option>Kharkiv</option>
-                            <option>Kiev</option>
-                            <option>Lvov</option>
-                            <option>Odessa</option>
-                        </select>
-                        <br>
-                        <div class="form-group">
-                            <label for="datetimepicker1">Pick-up date:</label>
-                            <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" name="pick_up" id="pick_up_date" required/>
-            <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-                            </div>
-                        </div>
-
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#datetimepicker1').datetimepicker({
-                                    format: 'YYYY-MM-DD HH:mm'
-                                });
-                            });
-                        </script>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="city_off">Drop-off:</label>
-                        <select class="form-control" id="city_off" name="city_off">
-                            <option>Kharkiv</option>
-                            <option>Kiev</option>
-                            <option>Lvov</option>
-                            <option>Odessa</option>
-                        </select>
-                        <br>
-                        <div class="form-group">
-                            <label for="datetimepicker2">Drop-off date:</label>
-                            <div class='input-group date' id='datetimepicker2'>
-                                <input type='text' class="form-control" name="drop_off" id="drop_off_date" required/>
-            <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-                            </div>
-                        </div>
-
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#datetimepicker2').datetimepicker({
-                                    format: 'YYYY-MM-DD HH:mm'
-                                });
-                            });
-                        </script>
-                    </div>
-                </div>
-                <p>Advanced options</p>
-                <div class="container-fluid">
-                    <label for="type">Car type:</label>
-                    <select class="form-control" id="type" required>
-                        <option>None</option>
-                        <option>Compact</option>
-                        <option>Standard</option>
-                        <option>Minivan</option>
-                    </select>
-                </div>
-                <button type="submit" name="submit">Search</button>
-            </form>
+            <div class="wrapper" id="cont">
+                <%@include file="html/searchBox.html" %>
+            </div>
         </div>
         <div class="col-sm-8">
             <% if (request.getAttribute("cars") != null) {
@@ -91,29 +24,54 @@
             for (Car car : cars) {
         %>
             <div class="well">
-                <form onsubmit="bookCar()" name="car" method="post" action="reserve">
-                    <p>
-                        <img src="services/carType/fetchImg/<%=car.getCarType().getTypeId()%>">
-                    </p>
-                    <p>
-                        Brand <%=car.getCarType().getBrand()%>
-                        Model <%=car.getCarType().getModel()%>
-                    </p>
-                    <p>
-                        Seats <%=car.getCarType().getSeats()%>
-                        TrunkVolume <%=car.getCarType().getTrunkVolume()%>
-                    </p>
-                    <p>
-                        Color <%=car.getColor()%>   TransmissionType <%=car.getCarType().getTransmissionType()%>
-                    </p>
-                    <p>
-                        Address <%=car.getAddress()%>
-                        Price per hour <%=car.getCarType().getPrice()%>
-                    </p>
-                    <input type="hidden" name="id" value="<%=car.getCarId()%>">
-                    <input type="hidden" name="price" value="<%=car.getCarType().getPrice()%>">
-                    <input type="submit" value="Reserve">
-                </form>
+                <div class="row">
+                    <div class="col-sm-3 font-li-my">
+                        <ul class="list-unstyled list-my">
+                            <li title="Air conditioning">
+                                <img src="html/glyphicons-22-snowflake.png" class="img-icons">
+                                Air conditioning
+                            </li>
+                            <li title="Passengers">
+                                <img src="html/glyphicons-593-person.png" class="img-icons">
+                                <%=car.getCarType().getSeats()%> passengers
+                            </li>
+                            <li title="Transmission">
+                                <img src="html/294168-200.png" class="img-icons">
+                                <%=car.getCarType().getTransmissionType()%> transmission
+                            </li>
+                            <li title="Trunk Volume">
+                                <img src="html/glyphicons-34-luggage.png" class="img-icons">
+                                <%=car.getCarType().getTrunkVolume()%> trunk capacity
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2 font-li-my">
+                        <ul class="list-unstyled list-my">
+                            <li title="Address">
+                                <img src="html/glyphicons-243-map-marker.png" class="img-icons">
+                                <%=car.getAddress()%>
+                            </li>
+                            <li title="Price">
+                                <img src="html/glyphicons-228-usd.png" class="img-icons">
+                                <%=car.getCarType().getPrice()%> per hour
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3 text-center car-brand">
+                        <p><%=car.getCarType().getBrand()%></p>
+                        <p><%=car.getCarType().getModel()%></p>
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="services/carType/fetchImg/<%=car.getCarType().getTypeId()%>" class="img-responsive">
+                    </div>
+                </div>
+                <div class="text-left" >
+                    <form onsubmit="bookCar(this)" name="car" method="post" action="reserve">
+                        <input type="hidden" name="id" value="<%=car.getCarId()%>">
+                        <input type="hidden" name="price" value="<%=car.getCarType().getPrice()%>">
+                        <input class="btn btn-success" type="submit" value="Reserve">
+                    </form>
+                </div>
             </div>
             <%
                         }
@@ -138,12 +96,11 @@
         theForm.appendChild(input);
     }
 
-    function bookCar() {
-        var node = document.forms.namedItem("car");
-        addHidden(node, 'city_up', document.getElementById("city_up").value);
-        addHidden(node, 'city_off', document.getElementById("city_off").value);
-        addHidden(node, 'pick_up', document.getElementById("pick_up_date").value);
-        addHidden(node, 'drop_off', document.getElementById("drop_off_date").value);
+    function bookCar(form) {
+        addHidden(form, 'city_up', document.getElementById("city_up").value);
+        addHidden(form, 'city_off', document.getElementById("city_off").value);
+        addHidden(form, 'pick_up', document.getElementById("pick_up_date").value);
+        addHidden(form, 'drop_off', document.getElementById("drop_off_date").value);
     }
 </script>
 </body>

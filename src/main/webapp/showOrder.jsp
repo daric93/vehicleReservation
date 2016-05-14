@@ -44,15 +44,14 @@
             <%
                 if (!order.isPaymentReceived()) {
             %>
-            <form action="" method="">
+            <form action="#" method="">
                 <input type="submit" value="Pay">
             </form>
-            <form action="" method="">
-                <input type="submit" value="Change dates">
-            </form>
-            <form action="" method="">
-                <input type="submit" value="Cancel reservation">
-            </form>
+            <%
+            request.getSession().setAttribute("order",order);
+            %>
+            <a href="editOrder.jsp" class="btn btn-info" role="button">Edit</a>
+            <a href="cancelReservation?orderId=<%=order.getOrderId()%>" class="btn btn-info" role="button">Cancel Reservation</a>
             <%
                 }
             } else {

@@ -66,6 +66,15 @@
     <url-pattern>/orders</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>CancelReservation</servlet-name>
+    <servlet-class>daric.vr.servlets.CancelReservation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CancelReservation</servlet-name>
+    <url-pattern>/cancelReservation</url-pattern>
+  </servlet-mapping>
+
 
   <session-config>
     <session-timeout>10</session-timeout>

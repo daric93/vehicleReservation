@@ -18,6 +18,7 @@ public class ServiceConf extends Application{
         resources.add(UserService.class);
         resources.add(UploadImages.class);
         resources.add(OrderService.class);
+        resources.add(AdminService.class);
         return resources;
     }
 }

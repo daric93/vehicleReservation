@@ -75,6 +75,33 @@
     <url-pattern>/cancelReservation</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>AdminLogIn</servlet-name>
+    <servlet-class>daric.vr.servlets.AdminLogIn</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminLogIn</servlet-name>
+    <url-pattern>/adminLogIn</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetCarTypes</servlet-name>
+    <servlet-class>daric.vr.servlets.GetCarTypes</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetCarTypes</servlet-name>
+    <url-pattern>/getCarTypes</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AddCarType</servlet-name>
+    <servlet-class>daric.vr.servlets.AddCarType</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCarType</servlet-name>
+    <url-pattern>/addCarType</url-pattern>
+  </servlet-mapping>
+
 
   <session-config>
     <session-timeout>10</session-timeout>

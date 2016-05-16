@@ -5,7 +5,7 @@
             </div>
         </div>
         <div class="col-sm-8">
-            <img src="html/bmw5_640x476.png" class="img-responsive-my" alt="Responsive image">
+            <img src="../img/bmw5_640x476.png" class="img-responsive-my" alt="Responsive image">
         </div>
     </div>
 </div>

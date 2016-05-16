@@ -20,14 +20,8 @@ footer {
     color: white;
 }
 
-/*
-.col-sm-4 {
-    height: 100%;
-}
-*/
-
 .img-responsive-my {
-    background: url(../html/bmw5_640x476.png) no-repeat center;
+    background: url(../img/bmw5_640x476.png) no-repeat center;
     background-size: cover;
     width: 75%;
     height: 75%;
@@ -67,7 +61,7 @@ footer {
     padding-top: 3%;
 }
 
-.form-group{
+.form-group-my {
     padding-top: 3%;
 }
 
@@ -88,6 +82,18 @@ footer {
     font-weight: bold;
     font-size: large;
     padding-top: 5%;
+}
+.table-types img{
+    width: 45px;
+    height: 30px;
+}
+.table-types{
+    font-size: small;
+}
+
+.form-my-style{
+    font-size: small;
+    margin-bottom: 2%;
 }
 
 

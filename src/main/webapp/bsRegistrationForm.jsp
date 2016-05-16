@@ -7,15 +7,15 @@
 <body>
 <%@include file="bsHeader.jsp" %>
 <div class="container-fluid" style=" color: darkorange; font-size: small;background-color: white">
-    <form id="form" action="registration" method="post">
-        <div class="form-group form-group-sm">
+    <form id="form" action="registration" method="post" >
+        <div class="form-group form-group-sm form-group-my">
             <label class="control-label col-sm-1 col-sm-offset-3" for="name">Name:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="name" id="name" placeholder="Enter name" required>
             </div>
         </div>
 
-        <div class="form-group form-group-sm">
+        <div class="form-group form-group-sm form-group-my">
             <label class="control-label col-sm-1 col-sm-offset-3" for="surname">Surname:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="surname" id="surname" placeholder="Enter surname"
@@ -23,21 +23,21 @@
             </div>
         </div>
 
-        <div class="form-group form-group-sm">
+        <div class="form-group form-group-sm form-group-my">
             <label class="control-label col-sm-1 col-sm-offset-3" for="date">Birthday:</label>
             <div class="col-sm-4">
                 <input type="date" class="form-control" name="date" id="date" placeholder="yyyy-mm-dd" required>
             </div>
         </div>
 
-        <div class="form-group form-group-sm">
+        <div class="form-group form-group-sm form-group-my">
             <label class="control-label col-sm-1 col-sm-offset-3" for="mail">Mail:</label>
             <div class="col-sm-4">
                 <input type="email" class="form-control" name="mail" id="mail" placeholder="Enter mail" required>
             </div>
         </div>
 
-        <div class="form-group form-group-sm">
+        <div class="form-group form-group-sm form-group-my">
             <label class="control-label col-sm-1 col-sm-offset-3" for="phone">Phone:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter phone number"
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="form-group form-group-sm">
+        <div class="form-group form-group-sm form-group-my">
             <label class="control-label col-sm-1 col-sm-offset-3" for="license">License:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="license" id="license" placeholder="Enter license"
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <div class="form-group form-group-sm">
+        <div class="form-group form-group-sm form-group-my">
             <label class="control-label col-sm-1 col-sm-offset-3" for="pass1">Password:</label>
             <div class="col-sm-4">
                 <input type="password" class="form-control" name="password" id="pass1" placeholder="Enter password"
@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        <div class="form-group form-group-sm">
+        <div class="form-group form-group-sm form-group-my">
             <label class="control-label col-sm-1 col-sm-offset-3" for="pass2">Repeat password:</label>
             <div class="col-sm-4">
                 <input type="password" class="form-control" name="repeat" id="pass2" placeholder="Enter password"
@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div class="form-group form-group-sm col-sm-offset-6">
+        <div class="form-group form-group-sm col-sm-offset-6 form-group-my">
             <input class="btn btn-success" type="button" value="Register" onclick="checkPass()">
             <a href="bsHome.jsp" class="btn btn-default">Cancel</a>
         </div>

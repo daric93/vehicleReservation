@@ -28,19 +28,19 @@
                     <div class="col-sm-3 font-li-my">
                         <ul class="list-unstyled list-my">
                             <li title="Air conditioning">
-                                <img src="html/glyphicons-22-snowflake.png" class="img-icons">
+                                <img src="img/glyphicons-22-snowflake.png" class="img-icons">
                                 Air conditioning
                             </li>
                             <li title="Passengers">
-                                <img src="html/glyphicons-593-person.png" class="img-icons">
+                                <img src="img/glyphicons-593-person.png" class="img-icons">
                                 <%=car.getCarType().getSeats()%> passengers
                             </li>
                             <li title="Transmission">
-                                <img src="html/294168-200.png" class="img-icons">
+                                <img src="img/294168-200.png" class="img-icons">
                                 <%=car.getCarType().getTransmissionType()%> transmission
                             </li>
                             <li title="Trunk Volume">
-                                <img src="html/glyphicons-34-luggage.png" class="img-icons">
+                                <img src="img/glyphicons-34-luggage.png" class="img-icons">
                                 <%=car.getCarType().getTrunkVolume()%> trunk capacity
                             </li>
                         </ul>
@@ -48,11 +48,11 @@
                     <div class="col-sm-2 font-li-my">
                         <ul class="list-unstyled list-my">
                             <li title="Address">
-                                <img src="html/glyphicons-243-map-marker.png" class="img-icons">
+                                <img src="img/glyphicons-243-map-marker.png" class="img-icons">
                                 <%=car.getAddress()%>
                             </li>
                             <li title="Price">
-                                <img src="html/glyphicons-228-usd.png" class="img-icons">
+                                <img src="img/glyphicons-228-usd.png" class="img-icons">
                                 <%=car.getCarType().getPrice()%> per hour
                             </li>
                         </ul>

@@ -3,6 +3,9 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+  <welcome-file-list>
+    <welcome-file>bsHome.jsp</welcome-file>
+  </welcome-file-list>
   <servlet>
     <servlet-name>LogIn</servlet-name>
     <servlet-class>daric.vr.servlets.LogIn</servlet-class>

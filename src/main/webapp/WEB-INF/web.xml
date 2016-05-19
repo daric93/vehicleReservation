@@ -105,6 +105,15 @@
     <url-pattern>/addCarType</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>GetOrder</servlet-name>
+    <servlet-class>daric.vr.servlets.GetOrder</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetOrder</servlet-name>
+    <url-pattern>/getOrder</url-pattern>
+  </servlet-mapping>
+
 
   <session-config>
     <session-timeout>10</session-timeout>

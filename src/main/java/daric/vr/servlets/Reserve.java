@@ -27,27 +27,25 @@ public class Reserve extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getSession().getAttribute("mail") != null) {
+        String mail = (String) req.getSession().getAttribute("mail");
+        if (mail != null) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            Order order = new Order();
-            // Car car = carService.getCarRef(Integer.parseInt(req.getParameter("id")));
-            //order.setCar(car);
-            order.setUser(userService.getUserByMail((String) req.getSession().getAttribute("mail")));
             try {
                 Date pick_up = dateFormat.parse(req.getParameter("pick_up"));
                 Date drop_off = dateFormat.parse(req.getParameter("drop_off"));
-                order.setStartDate(pick_up);
-                order.setEndDate(drop_off);
+                Order order;
+                if (req.getParameter("orderId") != null) {
+                    order = orderService.updateOrder(Integer.parseInt(req.getParameter("orderId")), pick_up, drop_off);
+                } else
+                    order = orderService.addOrder(Integer.parseInt(req.getParameter("id")), mail, pick_up, drop_off);
+                if (order != null)
+                    req.setAttribute("order", order.getOrderId());
+                else
+                    req.setAttribute("error", "These dates are not available");
+
             } catch (ParseException e) {
-                e.printStackTrace();
+                throw new ServletException(e);
             }
-            order.setOrderDate(new Date());
-            order.setPaymentReceived(false);
-            order = orderService.addOrder(Integer.parseInt(req.getParameter("id")), order);
-            if (order != null)
-                req.setAttribute("order", order.getOrderId());
-            else
-                req.setAttribute("error", "These dates are not available already");
             RequestDispatcher dispatcher = req.getRequestDispatcher("showOrder");
             dispatcher.forward(req, resp);
         } else {

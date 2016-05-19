@@ -68,9 +68,9 @@ public class CarService {
 
     @GET
     @Path("check/{id}")
-    public Car checkDate(@PathParam("id") int id, @QueryParam("startDate") Date start, @QueryParam("endDate") Date end) {
+    public Car checkDate(@PathParam("id") int id, @QueryParam("orderId") Integer orderId, @QueryParam("startDate") Date start, @QueryParam("endDate") Date end) {
         try {
-            return (Car) em.createNamedQuery("Car.checkDate").setParameter("id", id).setParameter("startDate", start).setParameter("endDate", end).getSingleResult();
+            return (Car) em.createNamedQuery("Car.checkDate").setParameter("id", id).setParameter("orderId", orderId).setParameter("startDate", start).setParameter("endDate", end).getSingleResult();
         } catch (NoResultException e) {
             return null;
         }

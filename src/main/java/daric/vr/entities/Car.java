@@ -10,7 +10,7 @@ import java.util.List;
         @NamedQuery(name = "Car.getAllCars", query = "select c from Car c where c.active = true "),
         @NamedQuery(name = "Car.getByParameters",
                 query = "select car from Car car where car.carId not in (select orders.car from Order orders where orders.startDate < :endDate and orders.endDate > :startDate) and car.address = :city_up and car.active = true "),
-        @NamedQuery(name = "Car.checkDate", query = "select car from Car car where car.carId = :id and not exists (select o from car.orders o where o.startDate < :endDate and o.endDate > :startDate)")
+        @NamedQuery(name = "Car.checkDate", query = "select car from Car car where car.carId = :id and not exists (select o from car.orders o where not (:orderId is not null and o.orderId=:orderId) and o.startDate < :endDate and o.endDate > :startDate)")
 })
 @NamedEntityGraph(name = "graph.Car.carTypes", attributeNodes = @NamedAttributeNode("carType"))
 

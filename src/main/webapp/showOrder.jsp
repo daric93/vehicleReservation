@@ -47,10 +47,7 @@
             <form action="#" method="">
                 <input type="submit" value="Pay">
             </form>
-            <%
-            request.getSession().setAttribute("order",order);
-            %>
-            <a href="editOrder.jsp" class="btn btn-info" role="button">Edit</a>
+            <a href="getOrder?orderId=<%=order.getOrderId()%>" class="btn btn-info" role="button">Edit</a>
             <a href="cancelReservation?orderId=<%=order.getOrderId()%>" class="btn btn-info" role="button">Cancel Reservation</a>
             <%
                 }

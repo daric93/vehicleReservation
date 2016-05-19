@@ -38,6 +38,9 @@ public class Order {
     @Column(name = "TOTAL_PRICE", nullable = false)
     private double totalPrice;
 
+    @Column(name = "OLD_ORDER_ID")
+    private int oldOrderId;
+
     public int getOrderId() {
         return orderId;
     }
@@ -100,5 +103,13 @@ public class Order {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public int getOldOrderId() {
+        return oldOrderId;
+    }
+
+    public void setOldOrderId(int oldOrderId) {
+        this.oldOrderId = oldOrderId;
     }
 }

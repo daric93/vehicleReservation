@@ -10,7 +10,9 @@ import java.util.List;
         @NamedQuery(name = "getImgById", query = "select c.img from CarType c where c.typeId= :id")
 })
 @Entity
-@Table(name = "CAR_TYPE")
+@Table(name = "CAR_TYPE", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"BRAND","MODEL"})
+})
 public class CarType {
     @Id
     @GeneratedValue

@@ -1,16 +1,17 @@
 package daric.vr.services;
 
+import com.google.common.base.Throwables;
 import daric.vr.entities.Car;
+import daric.vr.exceptions.DuplicateEntryException;
+import daric.vr.exceptions.RequiredFieldIsMissingException;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityGraph;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 @Path("carService")
@@ -22,33 +23,43 @@ public class CarService {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Car addCar(Car Car) {
-        return em.merge(Car);
+        try {
+            Car car = em.merge(Car);
+            em.flush();
+            return car;
+        } catch (PersistenceException e) {
+            if (Throwables.getCausalChain(e).stream().anyMatch(ex -> ex.getMessage().contains("Duplicate entry"))) {
+                throw new DuplicateEntryException("Car with this license number already exists");
+            } else {
+                Optional<Throwable> opt = Throwables.getCausalChain(e).stream().filter(ex -> ex.getMessage().contains("cannot be null")).findAny();
+                if (opt.isPresent())
+                    throw new RequiredFieldIsMissingException(opt.get().getMessage());
+                else throw e;
+            }
+        }
     }
 
     @DELETE
     @Path("{id}")
     public void deleteCar(@PathParam("id") int id) {
-        em.remove(em.find(Car.class, id));
+        em.remove(getCar(id));
     }
 
     @GET
     @Path("{id}")
     public Car getCar(@PathParam("id") int id) {
-        return em.find(Car.class, id);
+        Car car = em.find(Car.class, id);
+        if (car == null)
+            throw new NotFoundException("Car with this id is not found");
+        return car;
     }
 
     @GET
     @Path("orders/{id}")
     public Car getCarOrders(@PathParam("id") int id) {
-        Car car = em.find(Car.class, id);
+        Car car = getCar(id);
         car.getOrders();
         return car;
-    }
-
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Car updateCar(Car Car) {
-        return em.merge(Car);
     }
 
     @GET
@@ -66,17 +77,11 @@ public class CarService {
         return em.createNamedQuery("Car.getByParameters").setParameter("city_up", city).setParameter("startDate", start).setParameter("endDate", end).setHint("javax.persistence.fetchgraph", graph).getResultList();
     }
 
-    @GET
-    @Path("check/{id}")
     public Car checkDate(@PathParam("id") int id, @QueryParam("orderId") Integer orderId, @QueryParam("startDate") Date start, @QueryParam("endDate") Date end) {
         try {
             return (Car) em.createNamedQuery("Car.checkDate").setParameter("id", id).setParameter("orderId", orderId).setParameter("startDate", start).setParameter("endDate", end).getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
-    }
-
-    public Car getCarRef(int id) {
-        return em.getReference(Car.class, id);
     }
 }

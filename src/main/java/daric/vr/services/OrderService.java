@@ -3,6 +3,7 @@ package daric.vr.services;
 import daric.vr.entities.Car;
 import daric.vr.entities.Order;
 import daric.vr.exceptions.CarIsNotAvailableException;
+import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.exceptions.OrderAlreadyFinishedException;
 
 import javax.ejb.EJB;
@@ -60,7 +61,7 @@ public class OrderService {
     public Order getOrder(@PathParam("id") int id) {
         Order order = em.find(Order.class, id);
         if (order == null)
-            throw new NotFoundException("Order with such id is not found");
+            throw new EntryNotFoundException("Order with such id is not found");
         return order;
     }
 
@@ -127,10 +128,10 @@ public class OrderService {
     @Path("order/{id}")
     public Order getOrderWithCar(@PathParam("id") int id) {
         EntityGraph graph = em.createEntityGraph("graph.Order.car");
-        try{
+        try {
             return (Order) em.createNamedQuery("Order.getOrderWithCar").setParameter("id", id).setHint("javax.persistence.fetchgraph", graph).getSingleResult();
-        }catch (NoResultException e){
-            throw new NotFoundException(e.getMessage());
+        } catch (NoResultException e) {
+            throw new EntryNotFoundException(e.getMessage());
         }
     }
 }

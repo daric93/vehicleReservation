@@ -3,6 +3,7 @@ package daric.vr.services;
 import com.google.common.base.Throwables;
 import daric.vr.entities.CarType;
 import daric.vr.exceptions.DuplicateEntryException;
+import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.exceptions.RequiredFieldIsMissingException;
 
 import javax.ejb.Stateless;
@@ -54,7 +55,7 @@ public class CarTypeService {
     public CarType getCarType(@PathParam("id") int id) {
         CarType carType = em.find(CarType.class, id);
         if (carType == null)
-            throw new NotFoundException("CarType with this id is not found");
+            throw new EntryNotFoundException("CarType with this id is not found");
         return carType;
     }
 
@@ -72,7 +73,7 @@ public class CarTypeService {
         try {
             result = (byte[]) em.createNamedQuery("getImgById").setParameter("id", id).getSingleResult();
         } catch (NoResultException e) {
-            throw new NotFoundException(e);
+            throw new EntryNotFoundException("Entry with such id is not found");
         }
         return result;
     }

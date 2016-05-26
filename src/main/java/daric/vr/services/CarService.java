@@ -3,6 +3,7 @@ package daric.vr.services;
 import com.google.common.base.Throwables;
 import daric.vr.entities.Car;
 import daric.vr.exceptions.DuplicateEntryException;
+import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.exceptions.RequiredFieldIsMissingException;
 
 import javax.ejb.Stateless;
@@ -53,7 +54,7 @@ public class CarService {
     public Car getCar(@PathParam("id") int id) {
         Car car = em.find(Car.class, id);
         if (car == null)
-            throw new NotFoundException("Car with this id is not found");
+            throw new EntryNotFoundException("Car with this id is not found");
         return car;
     }
 

@@ -3,6 +3,7 @@ package daric.vr.services;
 import com.google.common.base.Throwables;
 import daric.vr.entities.Admin;
 import daric.vr.exceptions.DuplicateEntryException;
+import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.exceptions.RequiredFieldIsMissingException;
 
 import javax.ejb.Stateless;
@@ -25,7 +26,7 @@ public class AdminService {
         try {
             return (Admin) em.createNamedQuery("Admin.getAdmin").setParameter("mail", mail).getSingleResult();
         } catch (NoResultException e) {
-            throw new NotFoundException(e);
+            throw new EntryNotFoundException("Admin with such mail is not found");
         }
     }
 
@@ -52,7 +53,7 @@ public class AdminService {
     public void deleteAdmin(@PathParam("id") int id) {
         Admin admin = em.find(Admin.class, id);
         if (admin == null)
-            throw new NotFoundException("Entry with such id is not found");
+            throw new EntryNotFoundException("Entry with such id is not found");
         em.remove(admin);
     }
 }

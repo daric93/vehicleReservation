@@ -3,6 +3,7 @@ package daric.vr.services;
 import com.google.common.base.Throwables;
 import daric.vr.entities.User;
 import daric.vr.exceptions.DuplicateEntryException;
+import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.exceptions.RequiredFieldIsMissingException;
 
 import javax.ejb.Stateless;
@@ -61,7 +62,7 @@ public class UserService {
                     setParameter("mail", mail).setHint("javax.persistence.fetchgraph", graph).
                     getSingleResult();
         } catch (NoResultException e) {
-            throw new NotFoundException(e.getMessage());
+            throw new EntryNotFoundException("User with such mail is not found");
         }
     }
 }

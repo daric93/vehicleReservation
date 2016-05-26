@@ -36,6 +36,9 @@ public class User {
     @Column(name = "LICENSE", length = 50)
     private String license;
 
+    @Column(name = "BALANCE")
+    private double balance;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
@@ -105,6 +108,14 @@ public class User {
 
     public void setLicense(String license) {
         this.license = license;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     @Override

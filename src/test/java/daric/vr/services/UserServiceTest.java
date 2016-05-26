@@ -78,7 +78,7 @@ public class UserServiceTest {
         User user1 = service.addUser(user);
 
         user1.setName("Dasha");
-        User updatedUser = service.updateUser(user1);
+        User updatedUser = service.addUser(user1);
         assertEquals(user1, updatedUser);
 
     }

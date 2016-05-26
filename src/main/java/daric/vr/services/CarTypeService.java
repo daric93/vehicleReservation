@@ -5,6 +5,7 @@ import daric.vr.entities.CarType;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.ws.rs.*;
@@ -28,7 +29,7 @@ public class CarTypeService {
             return carType;
         } catch (PersistenceException e) {
             if (Throwables.getCausalChain(e).stream().anyMatch(ex -> ex.getMessage().contains("uniqueBrandModel"))) {
-                throw new DuplicateEntryException("Duplicate Car Type",e);
+                throw new DuplicateEntryException("Duplicate Car Type", e);
             } else {
                 throw e;
             }
@@ -44,8 +45,10 @@ public class CarTypeService {
     @GET
     @Path("{id}")
     public CarType getCarType(@PathParam("id") int id) {
-        //TODO: throw EntryNotFoundException
-        return em.find(CarType.class, id);
+        CarType carType = em.find(CarType.class, id);
+        if (carType == null)
+            throw new NotFoundException("CarType with this id is not found");
+        return carType;
     }
 
     @GET
@@ -58,8 +61,13 @@ public class CarTypeService {
     @Path("fetchImg/{id}")
     @Produces({"image/jpg", "image/png"})
     public byte[] fetchImg(@PathParam("id") int id) throws IOException {
-        //TODO: throw EntryNotFoundException
-        return (byte[]) em.createNamedQuery("getImgById").setParameter("id", id).getSingleResult();
+        byte[] result;
+        try {
+            result = (byte[]) em.createNamedQuery("getImgById").setParameter("id", id).getSingleResult();
+        } catch (NoResultException e) {
+            throw new NotFoundException(e);
+        }
+        return result;
     }
 
     public CarType getCarTypeRef(int id) {

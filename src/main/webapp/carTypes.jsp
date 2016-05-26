@@ -45,6 +45,13 @@
                         <input type="submit" value="Add">
                     </div>
                 </form>
+                <%
+                if(request.getParameter("error")!=null){
+                    %>
+                <p><%=request.getParameter("error")%></p>
+                <%
+                }
+                %>
             </div>
         </div>
         <%

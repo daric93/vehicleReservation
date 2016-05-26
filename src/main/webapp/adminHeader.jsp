@@ -10,8 +10,8 @@
         <ul class="nav navbar-nav">
             <li class="active"><a href="adminHomePage.jsp">Home</a></li>
             <li><a href="#">Orders</a></li>
-            <li><a href="#">Vehicles</a></li>
-            <li><a href="getCarTypes">CarTypes</a></li>
+            <li><a href="cars.jsp">Vehicles</a></li>
+            <li><a href="carTypes.jsp">CarTypes</a></li>
         </ul>
 
         <% if (session.getAttribute("mail") != null) {%>

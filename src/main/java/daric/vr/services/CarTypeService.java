@@ -2,6 +2,8 @@ package daric.vr.services;
 
 import com.google.common.base.Throwables;
 import daric.vr.entities.CarType;
+import daric.vr.exceptions.DuplicateEntryException;
+import daric.vr.exceptions.RequiredFieldIsMissingException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -12,6 +14,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 @Path("carType")
@@ -29,9 +32,13 @@ public class CarTypeService {
             return carType;
         } catch (PersistenceException e) {
             if (Throwables.getCausalChain(e).stream().anyMatch(ex -> ex.getMessage().contains("uniqueBrandModel"))) {
-                throw new DuplicateEntryException("Duplicate Car Type", e);
+                throw new DuplicateEntryException("Duplicate Car Type");
             } else {
-                throw e;
+                Optional<Throwable> opt = Throwables.getCausalChain(e).stream().filter(ex -> ex.getMessage().contains("cannot be null")).findAny();
+                if (opt.isPresent())
+                    throw new RequiredFieldIsMissingException(opt.get().getMessage());
+                else
+                    throw e;
             }
         }
     }

@@ -87,13 +87,35 @@
     <url-pattern>/adminLogIn</url-pattern>
   </servlet-mapping>
 
+  <filter>
+    <filter-name>GetCarTypes</filter-name>
+    <filter-class>daric.vr.servlets.GetCarTypes</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>GetCarTypes</filter-name>
+    <url-pattern>/carTypes.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>GetCarTypes</filter-name>
+    <url-pattern>/cars.jsp</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>GetCars</filter-name>
+    <filter-class>daric.vr.servlets.GetCars</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>GetCars</filter-name>
+    <url-pattern>/cars.jsp</url-pattern>
+  </filter-mapping>
+
   <servlet>
-    <servlet-name>GetCarTypes</servlet-name>
-    <servlet-class>daric.vr.servlets.GetCarTypes</servlet-class>
+    <servlet-name>GetCarType</servlet-name>
+    <servlet-class>daric.vr.servlets.GetCarType</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetCarTypes</servlet-name>
-    <url-pattern>/getCarTypes</url-pattern>
+    <servlet-name>GetCarType</servlet-name>
+    <url-pattern>/getCarType</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -114,6 +136,23 @@
     <url-pattern>/getOrder</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>UpdateCarType</servlet-name>
+    <servlet-class>daric.vr.servlets.UpdateCarType</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateCarType</servlet-name>
+    <url-pattern>/updateCarType</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AddCar</servlet-name>
+    <servlet-class>daric.vr.servlets.AddCar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCar</servlet-name>
+    <url-pattern>/addCar</url-pattern>
+  </servlet-mapping>
 
   <session-config>
     <session-timeout>10</session-timeout>

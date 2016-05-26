@@ -2,8 +2,9 @@ package daric.vr.servlets;
 
 import com.google.common.io.ByteStreams;
 import daric.vr.entities.CarType;
+import daric.vr.exceptions.RequiredFieldIsMissingException;
 import daric.vr.services.CarTypeService;
-import daric.vr.services.DuplicateEntryException;
+import daric.vr.exceptions.DuplicateEntryException;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -32,7 +33,7 @@ public class AddCarType extends HttpServlet {
 
         try {
             carTypeService.addCarType(carType);
-        } catch (DuplicateEntryException e) {
+        } catch (DuplicateEntryException | RequiredFieldIsMissingException e) {
             resp.sendRedirect("carTypes.jsp?error=" + e.getMessage());
             return;
         }

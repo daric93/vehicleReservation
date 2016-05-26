@@ -1,6 +1,7 @@
 package daric.vr.servlets;
 
 import daric.vr.entities.User;
+import daric.vr.exceptions.DuplicateEntryException;
 import daric.vr.services.UserService;
 
 import javax.ejb.EJB;
@@ -20,6 +21,7 @@ public class Registration extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //TODO: make a hint in registration form about name and surname
         User user = new User();
         user.setName(req.getParameter("name"));
         user.setSurname(req.getParameter("surname"));
@@ -29,19 +31,16 @@ public class Registration extends HttpServlet {
         user.setDateOfBirth(LocalDate.parse(req.getParameter("date"), DateTimeFormatter.ISO_LOCAL_DATE));
         user.setPassword(req.getParameter("password"));
 
-        if(service.getUserByMail(user.getMail())==null){
+        try {
             User addedUser = service.addUser(user);
             HttpSession session = req.getSession();
             session.setAttribute("mail", addedUser.getMail());
-
             RequestDispatcher dispatcher = req.getRequestDispatcher("bsRegistrationMessage.jsp");
             dispatcher.forward(req, resp);
-        }else{
-            req.setAttribute("error", "E-mail already exists");
+        } catch (DuplicateEntryException e) {
+            req.setAttribute("error", e.getMessage());
             RequestDispatcher dispatcher = req.getRequestDispatcher("bsRegistrationMessage.jsp");
-            dispatcher.include(req,resp);
+            dispatcher.include(req, resp);
         }
-
-
     }
 }

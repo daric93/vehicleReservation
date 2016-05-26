@@ -1,6 +1,7 @@
 package daric.vr.servlets;
 
 import daric.vr.entities.Order;
+import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.services.OrderService;
 
 import javax.ejb.EJB;
@@ -11,15 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class GetOrder extends HttpServlet{
+public class GetOrder extends HttpServlet {
     @EJB
     OrderService orderService;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String orderId = req.getParameter("orderId");
-        Order order = orderService.getOrderWithCar(Integer.parseInt(orderId));
-        req.setAttribute("order",order);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("editOrder.jsp");
-        dispatcher.forward(req,resp);
+        try {
+            Order order = orderService.getOrderWithCar(Integer.parseInt(orderId));
+            req.setAttribute("order", order);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("editOrder.jsp");
+            dispatcher.forward(req, resp);
+        } catch (EntryNotFoundException e) {
+            resp.sendError(404, e.getMessage());
+        }
     }
 }

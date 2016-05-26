@@ -13,6 +13,16 @@
     <div class="row">
         <div class="col-sm-3 col-sm-offset-1" id="mainPage">
             <div class="well">
+                <%
+                    String error = request.getParameter("error");
+                    if (error != null) {
+                %>
+                <div class="alert-danger">
+                    <%=error%>
+                </div>
+                <%
+                    }
+                %>
                 <form action="addCar" method="post">
                     <%
                         List<CarType> carTypes = (List<CarType>) request.getAttribute("carTypes");

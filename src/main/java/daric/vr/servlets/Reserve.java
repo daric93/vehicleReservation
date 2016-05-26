@@ -1,6 +1,7 @@
 package daric.vr.servlets;
 
 import daric.vr.entities.Order;
+import daric.vr.exceptions.CarIsNotAvailableException;
 import daric.vr.services.CarService;
 import daric.vr.services.OrderService;
 import daric.vr.services.UserService;
@@ -34,15 +35,20 @@ public class Reserve extends HttpServlet {
                 Date pick_up = dateFormat.parse(req.getParameter("pick_up"));
                 Date drop_off = dateFormat.parse(req.getParameter("drop_off"));
                 Order order;
-                if (req.getParameter("orderId") != null) {
-                    order = orderService.updateOrder(Integer.parseInt(req.getParameter("orderId")), pick_up, drop_off);
-                } else
-                    order = orderService.addOrder(Integer.parseInt(req.getParameter("id")), mail, pick_up, drop_off);
-                if (order != null)
-                    req.setAttribute("order", order.getOrderId());
-                else
-                    req.setAttribute("error", "These dates are not available");
-
+                try {
+                    if (req.getParameter("orderId") != null) {
+                        order = orderService.updateOrder(Integer.parseInt(req.getParameter("orderId")), pick_up, drop_off);
+                    } else
+                        order = orderService.addOrder(Integer.parseInt(req.getParameter("id")), mail, pick_up, drop_off);
+                    if (order != null)
+                        req.setAttribute("order", order.getOrderId());
+                    else
+                        req.setAttribute("error", "These dates are not available");
+                }catch (CarIsNotAvailableException e){
+                    req.setAttribute("error",e.getMessage());
+                    RequestDispatcher dispatcher = req.getRequestDispatcher("SearchPage");
+                    dispatcher.forward(req, resp);
+                }
             } catch (ParseException e) {
                 throw new ServletException(e);
             }

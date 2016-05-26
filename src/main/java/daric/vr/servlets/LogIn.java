@@ -1,6 +1,7 @@
 package daric.vr.servlets;
 
 import daric.vr.entities.User;
+import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.services.UserService;
 
 import javax.ejb.EJB;
@@ -22,14 +23,19 @@ public class LogIn extends HttpServlet {
 
         String mail = req.getParameter("mail");
         String pass = req.getParameter("password");
-
-        User user = serv.getUserByMail(mail);
-        if (user != null && Objects.equals(user.getPassword(), pass)) {
-            HttpSession session = req.getSession();
-            session.setAttribute("mail", mail);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("bsHome.jsp");
-            dispatcher.forward(req, resp);
-        } else {
+        try {
+            User user = serv.getUserByMail(mail);
+            if (Objects.equals(user.getPassword(), pass)) {
+                HttpSession session = req.getSession();
+                session.setAttribute("mail", mail);
+                RequestDispatcher dispatcher = req.getRequestDispatcher("bsHome.jsp");
+                dispatcher.forward(req, resp);
+            } else {
+                req.setAttribute("error", "Wrong username or password");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("bsLoginForm.jsp");
+                dispatcher.include(req, resp);
+            }
+        } catch (EntryNotFoundException e) {
             req.setAttribute("error", "Wrong username or password");
             RequestDispatcher dispatcher = req.getRequestDispatcher("bsLoginForm.jsp");
             dispatcher.include(req, resp);

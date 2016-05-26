@@ -1,6 +1,6 @@
 package daric.vr.servlets;
 
-import daric.vr.services.OrderAlreadyFinishedException;
+import daric.vr.exceptions.OrderAlreadyFinishedException;
 import daric.vr.services.OrderService;
 
 import javax.ejb.EJB;
@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.ClientErrorException;
 import java.io.IOException;
 
 public class CancelReservation extends HttpServlet {
@@ -21,8 +22,7 @@ public class CancelReservation extends HttpServlet {
         try {
             orderService.deleteOrder(orderId);
         } catch (OrderAlreadyFinishedException e) {
-            //TODO: show error message in page
-            req.setAttribute("error", e);
+            req.setAttribute("error", e.getMessage());
             RequestDispatcher dispatcher = req.getRequestDispatcher("showOrder.jsp");
             dispatcher.forward(req, resp);
         }

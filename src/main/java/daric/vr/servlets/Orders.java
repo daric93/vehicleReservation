@@ -1,6 +1,7 @@
 package daric.vr.servlets;
 
 import daric.vr.entities.User;
+import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.services.UserService;
 
 import javax.ejb.EJB;
@@ -17,9 +18,15 @@ public class Orders extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = userService.getUserByMail((String) req.getSession().getAttribute("mail"));
-        req.setAttribute("orders", user);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("orders.jsp");
-        dispatcher.forward(req, resp);
+        try {
+            User user = userService.getUserByMail((String) req.getSession().getAttribute("mail"));
+            req.setAttribute("orders", user);
+            //TODO: show only last version with prices
+            //TODO: show order status: active, old, future
+            RequestDispatcher dispatcher = req.getRequestDispatcher("orders.jsp");
+            dispatcher.forward(req, resp);
+        } catch (EntryNotFoundException e) {
+            resp.sendError(404, e.getMessage());
+        }
     }
 }

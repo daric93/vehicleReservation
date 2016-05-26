@@ -16,9 +16,18 @@
             </div>
         </div>
         <div class="col-sm-8">
-            <% if (request.getAttribute("cars") != null) {
-                List<Car> cars = (List<Car>) request.getAttribute("cars");
-                if (cars.isEmpty()) {
+            <%
+                String error = (String) request.getAttribute("error");
+                if (error != null) {
+            %>
+            <div class="alert-warning alert-dismissable">
+                <%=error%>
+            </div>
+            <%
+                }
+                if (request.getAttribute("cars") != null) {
+                    List<Car> cars = (List<Car>) request.getAttribute("cars");
+                    if (cars.isEmpty()) {
             %>No available cars<%
         } else {
             for (Car car : cars) {
@@ -58,14 +67,16 @@
                         </ul>
                     </div>
                     <div class="col-sm-3 text-center car-brand">
-                        <p><%=car.getCarType().getBrand()%></p>
-                        <p><%=car.getCarType().getModel()%></p>
+                        <p><%=car.getCarType().getBrand()%>
+                        </p>
+                        <p><%=car.getCarType().getModel()%>
+                        </p>
                     </div>
                     <div class="col-sm-4">
                         <img src="services/carType/fetchImg/<%=car.getCarType().getTypeId()%>" class="img-responsive">
                     </div>
                 </div>
-                <div class="text-left" >
+                <div class="text-left">
                     <form onsubmit="bookCar(this)" name="car" method="post" action="reserve">
                         <input type="hidden" name="id" value="<%=car.getCarId()%>">
                         <input type="hidden" name="price" value="<%=car.getCarType().getPrice()%>">

@@ -1,6 +1,7 @@
 package daric.vr.servlets;
 
 import daric.vr.entities.Order;
+import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.services.OrderService;
 
 import javax.ejb.EJB;
@@ -17,15 +18,19 @@ public class ShowOrder extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getAttribute("order") != null) {
-            Order order = orderService.getOrderWithCar((int) req.getAttribute("order"));
-            req.setAttribute("order", order);
+        try {
+            if (req.getAttribute("order") != null) {
+                Order order = orderService.getOrderWithCar((int) req.getAttribute("order"));
+                req.setAttribute("order", order);
+            }
+            if (req.getParameter("order") != null) {
+                Order order = orderService.getOrderWithCar(Integer.parseInt(req.getParameter("order")));
+                req.setAttribute("order", order);
+            }
+            RequestDispatcher dispatcher = req.getRequestDispatcher("showOrder.jsp");
+            dispatcher.forward(req, resp);
+        } catch (EntryNotFoundException e) {
+            resp.sendError(404, e.getMessage());
         }
-        if (req.getParameter("order") != null) {
-            Order order = orderService.getOrderWithCar(Integer.parseInt(req.getParameter("order")));
-            req.setAttribute("order", order);
-        }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("showOrder.jsp");
-        dispatcher.forward(req, resp);
     }
 }

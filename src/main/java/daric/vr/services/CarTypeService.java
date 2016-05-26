@@ -1,10 +1,12 @@
 package daric.vr.services;
 
+import com.google.common.base.Throwables;
 import daric.vr.entities.CarType;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
@@ -19,19 +21,30 @@ public class CarTypeService {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public CarType addCarType(CarType carType) {
-        return em.merge(carType);
+    public CarType addCarType(CarType carType) throws DuplicateEntryException {
+        try {
+            em.merge(carType);
+            em.flush();
+            return carType;
+        } catch (PersistenceException e) {
+            if (Throwables.getCausalChain(e).stream().anyMatch(ex -> ex.getMessage().contains("uniqueBrandModel"))) {
+                throw new DuplicateEntryException("Duplicate Car Type",e);
+            } else {
+                throw e;
+            }
+        }
     }
 
     @DELETE
     @Path("{id}")
     public void deleteCarType(@PathParam("id") int id) {
-        em.remove(em.find(CarType.class, id));
+        em.remove(getCarType(id));
     }
 
     @GET
     @Path("{id}")
     public CarType getCarType(@PathParam("id") int id) {
+        //TODO: throw EntryNotFoundException
         return em.find(CarType.class, id);
     }
 
@@ -41,17 +54,15 @@ public class CarTypeService {
         return em.createNamedQuery("selectAllCarType").getResultList();
     }
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public CarType updateCarType(CarType carType) {
-        return em.merge(carType);
-    }
-
     @GET
     @Path("fetchImg/{id}")
     @Produces({"image/jpg", "image/png"})
     public byte[] fetchImg(@PathParam("id") int id) throws IOException {
+        //TODO: throw EntryNotFoundException
         return (byte[]) em.createNamedQuery("getImgById").setParameter("id", id).getSingleResult();
     }
 
+    public CarType getCarTypeRef(int id) {
+        return em.getReference(CarType.class, id);
+    }
 }

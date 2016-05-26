@@ -2,8 +2,8 @@ package daric.vr.servlets;
 
 import com.google.common.io.ByteStreams;
 import daric.vr.entities.CarType;
+import daric.vr.exceptions.DuplicateEntryException;
 import daric.vr.services.CarTypeService;
-import daric.vr.services.DuplicateEntryException;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;

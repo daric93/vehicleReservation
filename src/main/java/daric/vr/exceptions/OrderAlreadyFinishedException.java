@@ -1,4 +1,4 @@
-package daric.vr.services;
+package daric.vr.exceptions;
 
 import javax.ejb.ApplicationException;
 

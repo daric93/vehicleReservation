@@ -2,11 +2,14 @@ package daric.vr.services;
 
 import daric.vr.entities.Car;
 import daric.vr.entities.Order;
+import daric.vr.exceptions.CarIsNotAvailableException;
+import daric.vr.exceptions.OrderAlreadyFinishedException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,28 +33,35 @@ public class OrderService {
                           @FormParam("userMail") String mail,
                           @FormParam("pick_up") Date startDate,
                           @FormParam("drop_off") Date endDate) {
-        Car car = carService.checkDate(carId, null, startDate, endDate);
-        if (car != null) {
-            Order order = new Order();
-            order.setStartDate(startDate);
-            order.setEndDate(endDate);
-            order.setOrderDate(new Date());
-            order.setCar(car);
-            order.setUser(userService.getUserByMail(mail));
-            order.setPaymentReceived(false);
-            long duration = endDate.getTime() - startDate.getTime();
-            long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-            double price = car.getCarType().getPrice();
-            order.setTotalPrice(price / 60 * diffInMinutes);
-            return em.merge(order);
-        } else return null;
+        //TODO: check if param is missing
+        Car car;
+        try {
+            car = carService.checkDate(carId, null, startDate, endDate);
+        } catch (NoResultException e) {
+            throw new CarIsNotAvailableException("Car is not available during this period");
+        }
+        Order order = new Order();
+        order.setStartDate(startDate);
+        order.setEndDate(endDate);
+        order.setOrderDate(new Date());
+        order.setCar(car);
+        order.setUser(userService.getUserByMail(mail));
+        order.setPaymentReceived(false);
+        long duration = endDate.getTime() - startDate.getTime();
+        long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
+        double price = car.getCarType().getPrice();
+        order.setTotalPrice(price / 60 * diffInMinutes);
+        return em.merge(order);
     }
 
 
     @GET
     @Path("{id}")
     public Order getOrder(@PathParam("id") int id) {
-        return em.find(Order.class, id);
+        Order order = em.find(Order.class, id);
+        if (order == null)
+            throw new NotFoundException("Order with such id is not found");
+        return order;
     }
 
     @PUT
@@ -59,31 +69,36 @@ public class OrderService {
     public Order updateOrder(@FormParam("orderId") int orderId,
                              @FormParam("pick_up") Date startDate,
                              @FormParam("drop_off") Date endDate) {
+        //TODO: check if param is missing
         Order oldOrder = getOrderWithCar(orderId);
-        Car car = carService.checkDate(oldOrder.getCar().getCarId(), orderId, startDate, endDate);
-        if (car != null) {
-            Order newOrder = new Order();
-            newOrder.setStartDate(startDate);
-            newOrder.setEndDate(endDate);
-            newOrder.setOrderDate(new Date());
-            newOrder.setCar(car);
-            newOrder.setUser(oldOrder.getUser());
+        //TODO: check if NotFoundException is threw
+        Car car;
+        try {
+            car = carService.checkDate(oldOrder.getCar().getCarId(), orderId, startDate, endDate);
+        } catch (NoResultException e) {
+            throw new CarIsNotAvailableException("Car is not available during this period");
+        }
+        Order newOrder = new Order();
+        newOrder.setStartDate(startDate);
+        newOrder.setEndDate(endDate);
+        newOrder.setOrderDate(new Date());
+        newOrder.setCar(car);
+        newOrder.setUser(oldOrder.getUser());
 
-            long duration = endDate.getTime() - startDate.getTime();
-            long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
-            double price = car.getCarType().getPrice() / 60 * diffInMinutes;
-            if (price < oldOrder.getTotalPrice()) {
-                //TODO: returnMoney();
-                newOrder.setPaymentReceived(true);
-                em.remove(oldOrder);
-            } else {
-                //TODO: pay();
-                newOrder.setPaymentReceived(false);
-                newOrder.setOldOrderId(orderId);
-            }
-            newOrder.setTotalPrice(price);
-            return em.merge(newOrder);
-        } else return null;
+        long duration = endDate.getTime() - startDate.getTime();
+        long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
+        double price = car.getCarType().getPrice() / 60 * diffInMinutes;
+        if (price < oldOrder.getTotalPrice()) {
+            //TODO: returnMoney();
+            newOrder.setPaymentReceived(true);
+            em.remove(oldOrder);
+        } else {
+            //TODO: pay();
+            newOrder.setPaymentReceived(false);
+            newOrder.setOldOrderId(orderId);
+        }
+        newOrder.setTotalPrice(price);
+        return em.merge(newOrder);
     }
 
     @DELETE
@@ -104,12 +119,18 @@ public class OrderService {
             }
         }
         em.remove(order);
+        //TODO: check if exist old version of order
+        //TODO: user can cancel whole order or cancel changes and return to old version !!!!!
     }
 
     @GET
     @Path("order/{id}")
     public Order getOrderWithCar(@PathParam("id") int id) {
         EntityGraph graph = em.createEntityGraph("graph.Order.car");
-        return (Order) em.createNamedQuery("Order.getOrderWithCar").setParameter("id", id).setHint("javax.persistence.fetchgraph", graph).getSingleResult();
+        try{
+            return (Order) em.createNamedQuery("Order.getOrderWithCar").setParameter("id", id).setHint("javax.persistence.fetchgraph", graph).getSingleResult();
+        }catch (NoResultException e){
+            throw new NotFoundException(e.getMessage());
+        }
     }
 }

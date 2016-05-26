@@ -6,7 +6,10 @@ import daric.vr.exceptions.DuplicateEntryException;
 import daric.vr.exceptions.RequiredFieldIsMissingException;
 
 import javax.ejb.Stateless;
-import javax.persistence.*;
+import javax.persistence.EntityGraph;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Date;
@@ -78,10 +81,6 @@ public class CarService {
     }
 
     public Car checkDate(@PathParam("id") int id, @QueryParam("orderId") Integer orderId, @QueryParam("startDate") Date start, @QueryParam("endDate") Date end) {
-        try {
-            return (Car) em.createNamedQuery("Car.checkDate").setParameter("id", id).setParameter("orderId", orderId).setParameter("startDate", start).setParameter("endDate", end).getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+        return (Car) em.createNamedQuery("Car.checkDate").setParameter("id", id).setParameter("orderId", orderId).setParameter("startDate", start).setParameter("endDate", end).getSingleResult();
     }
 }

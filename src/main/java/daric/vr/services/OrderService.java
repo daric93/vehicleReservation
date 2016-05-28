@@ -134,4 +134,19 @@ public class OrderService {
             throw new EntryNotFoundException(e.getMessage());
         }
     }
+
+    @PUT
+    @Path("pay/{id}")
+    public Order payForOrder(@PathParam("id") int id) {
+        //TODO: check if logged user and user in order is equal
+        Order order = getOrder(id);
+        order.setPaymentReceived(true);
+        User user = order.getUser();
+        double balance = user.getBalance();
+        if (balance < order.getTotalPrice()) {
+            throw new NotEnoughMoneyOnBalanceException("Amount of money on balance is not enough.");
+        }
+        user.setBalance(balance - order.getTotalPrice());
+        return order;
+    }
 }

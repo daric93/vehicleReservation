@@ -26,7 +26,7 @@ public class Orders extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher("orders.jsp");
             dispatcher.forward(req, resp);
         } catch (EntryNotFoundException e) {
-            resp.sendError(404, e.getMessage());
+            resp.sendError(404, "Session is over");
         }
     }
 }

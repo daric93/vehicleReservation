@@ -30,6 +30,7 @@ public class Registration extends HttpServlet {
         user.setTelNumber(req.getParameter("phone"));
         user.setDateOfBirth(LocalDate.parse(req.getParameter("date"), DateTimeFormatter.ISO_LOCAL_DATE));
         user.setPassword(req.getParameter("password"));
+        user.setBalance(1000);
 
         try {
             User addedUser = service.addUser(user);

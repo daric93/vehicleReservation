@@ -2,8 +2,10 @@ package daric.vr.services;
 
 import daric.vr.entities.Car;
 import daric.vr.entities.Order;
+import daric.vr.entities.User;
 import daric.vr.exceptions.CarIsNotAvailableException;
 import daric.vr.exceptions.EntryNotFoundException;
+import daric.vr.exceptions.NotEnoughMoneyOnBalanceException;
 import daric.vr.exceptions.OrderAlreadyFinishedException;
 
 import javax.ejb.EJB;
@@ -14,6 +16,9 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -32,15 +37,20 @@ public class OrderService {
     @Path("add")
     public Order addOrder(@FormParam("carId") int carId,
                           @FormParam("userMail") String mail,
-                          @FormParam("pick_up") Date startDate,
-                          @FormParam("drop_off") Date endDate) {
+                          @FormParam("pick_up") String start,
+                          @FormParam("drop_off") String end) throws ParseException {
+        //TODO: check if logged user and user in order is equal
         //TODO: check if param is missing
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date startDate = dateFormat.parse(start);
+        Date endDate = dateFormat.parse(end);
+
         Car car;
-        try {
-            car = carService.checkDate(carId, null, startDate, endDate);
-        } catch (NoResultException e) {
-            throw new CarIsNotAvailableException("Car is not available during this period");
-        }
+        System.out.println("userMail" + mail);
+        System.out.println("pick_up" + startDate.toString());
+        System.out.println("drop_off" + endDate.toString());
+
+        car = carService.checkDate(carId, null, startDate, endDate);
         Order order = new Order();
         order.setStartDate(startDate);
         order.setEndDate(endDate);
@@ -68,9 +78,12 @@ public class OrderService {
     @PUT
     @Path("update")
     public Order updateOrder(@FormParam("orderId") int orderId,
-                             @FormParam("pick_up") Date startDate,
-                             @FormParam("drop_off") Date endDate) {
+                             @FormParam("pick_up") String start,
+                             @FormParam("drop_off") String end) throws ParseException {
         //TODO: check if param is missing
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date startDate = dateFormat.parse(start);
+        Date endDate = dateFormat.parse(end);
         Order oldOrder = getOrderWithCar(orderId);
         //TODO: check if NotFoundException is threw
         Car car;
@@ -84,17 +97,17 @@ public class OrderService {
         newOrder.setEndDate(endDate);
         newOrder.setOrderDate(new Date());
         newOrder.setCar(car);
-        newOrder.setUser(oldOrder.getUser());
+        User user = oldOrder.getUser();
+        newOrder.setUser(user);
 
         long duration = endDate.getTime() - startDate.getTime();
         long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(duration);
         double price = car.getCarType().getPrice() / 60 * diffInMinutes;
         if (price < oldOrder.getTotalPrice()) {
-            //TODO: returnMoney();
+            user.setBalance(user.getBalance() + oldOrder.getTotalPrice() - price);
             newOrder.setPaymentReceived(true);
             em.remove(oldOrder);
         } else {
-            //TODO: pay();
             newOrder.setPaymentReceived(false);
             newOrder.setOldOrderId(orderId);
         }
@@ -108,13 +121,15 @@ public class OrderService {
         Order order = getOrder(id);
         Date now = new Date();
         if (order.getStartDate().after(now)) {
-            //TODO: returnMoney(order.getTotalPrice());
+            User user = order.getUser();
+            user.setBalance(user.getBalance() + order.getTotalPrice());
         } else {
             if (order.getStartDate().before(now) && order.getEndDate().after(now)) {
                 long durationAllInMin = TimeUnit.MILLISECONDS.toMinutes(order.getEndDate().getTime() - order.getStartDate().getTime());
                 long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(now.getTime() - order.getStartDate().getTime());
                 double price = order.getTotalPrice() / durationAllInMin * diffInMinutes + 10;
-                //TODO: pay(price);
+                User user = order.getUser();
+                user.setBalance(user.getBalance() + (order.getTotalPrice() - price));
             } else {
                 throw new OrderAlreadyFinishedException("Order already finished");
             }

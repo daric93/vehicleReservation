@@ -51,15 +51,15 @@
         %>
         </tbody>
     </table>
-    <form name="myForm" action="showOrder" method="post">
-        <input type="text" name="order" hidden>
+    <form name="myForm" action="showOrder.jsp" method="post">
+        <input type="text" name="orderId" hidden>
     </form>
 </div>
 <%@include file="html/footer" %>
 </body>
 <script>
     function getElements(row) {
-        document.myForm.order.value = row.cells[0].innerText;
+        document.myForm.orderId.value = row.cells[0].innerText;
         document.myForm.submit();
     }
 

@@ -9,8 +9,14 @@
 <%@include file="bsHeader.jsp" %>
 <div class="container-fluid">
     <%
+        if (request.getParameter("error") != null) {
+    %>
+    <div class="alert-danger">
+        <%=request.getParameter("error")%>
+    </div>
+    <%
+        }
         Order order = (Order) request.getAttribute("order");
-        if (order != null) {
     %>
     <div class="row">
         <div class="col-sm-4">
@@ -95,17 +101,11 @@
             </p>
             <p id="totalPrice">Total price: <%=order.getTotalPrice()%>
             </p>
-            <form onsubmit="addDates(this)" method="post" action="reserve">
+            <form onsubmit="addDates(this)" method="post" action="updateOrder">
                 <input type="hidden" name="orderId" value="<%=order.getOrderId()%>">>
                 <input class="btn btn-success" type="submit" value="Change">
             </form>
             <a href="orders.jsp" class="btn btn-info" role="button">Cancel</a>
-            <%
-            } else {
-            %><p><%=request.getAttribute("error")%>
-        </p><%
-            }
-        %>
         </div>
     </div>
 </div>

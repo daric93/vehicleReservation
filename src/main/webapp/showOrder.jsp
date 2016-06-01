@@ -44,15 +44,16 @@
             <%
                 if (!order.isPaymentReceived()) {
             %>
-            <form action="#" method="">
-                <input type="submit" value="Pay">
-            </form>
-            <a href="getOrder?orderId=<%=order.getOrderId()%>" class="btn btn-info" role="button">Edit</a>
-            <a href="cancelReservation?orderId=<%=order.getOrderId()%>" class="btn btn-info" role="button">Cancel Reservation</a>
+            <a href="pay?orderId=<%=order.getOrderId()%>" class="btn btn-info" role="button">Pay</a>
             <%
                 }
+            %>
+            <a href="editOrder.jsp?orderId=<%=order.getOrderId()%>" class="btn btn-info" role="button">Edit</a>
+            <a href="cancelReservation?orderId=<%=order.getOrderId()%>" class="btn btn-info" role="button">Cancel
+                Reservation</a>
+            <%
             } else {
-            %><p><%=request.getAttribute("error")%>
+            %><p><%=request.getParameter("error")%>
         </p><%
             }
         %>

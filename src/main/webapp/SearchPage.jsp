@@ -17,7 +17,7 @@
         </div>
         <div class="col-sm-8">
             <%
-                String error = (String) request.getAttribute("error");
+                String error = (String) request.getParameter("error");
                 if (error != null) {
             %>
             <div class="alert-warning alert-dismissable">

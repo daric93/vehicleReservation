@@ -52,15 +52,6 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>ShowOrder</servlet-name>
-    <servlet-class>daric.vr.servlets.ShowOrder</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ShowOrder</servlet-name>
-    <url-pattern>/showOrder</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>Orders</servlet-name>
     <servlet-class>daric.vr.servlets.Orders</servlet-class>
   </servlet>
@@ -127,14 +118,18 @@
     <url-pattern>/addCarType</url-pattern>
   </servlet-mapping>
 
-  <servlet>
-    <servlet-name>GetOrder</servlet-name>
-    <servlet-class>daric.vr.servlets.GetOrder</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetOrder</servlet-name>
-    <url-pattern>/getOrder</url-pattern>
-  </servlet-mapping>
+  <filter>
+    <filter-name>GetOrder</filter-name>
+    <filter-class>daric.vr.servlets.GetOrder</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>GetOrder</filter-name>
+    <url-pattern>/editOrder.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>GetOrder</filter-name>
+    <url-pattern>/showOrder.jsp</url-pattern>
+  </filter-mapping>
 
   <servlet>
     <servlet-name>UpdateCarType</servlet-name>
@@ -152,6 +147,24 @@
   <servlet-mapping>
     <servlet-name>AddCar</servlet-name>
     <url-pattern>/addCar</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>UpdateOrder</servlet-name>
+    <servlet-class>daric.vr.servlets.UpdateOrder</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateOrder</servlet-name>
+    <url-pattern>/updateOrder</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>PayForOrder</servlet-name>
+    <servlet-class>daric.vr.servlets.PayForOrder</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PayForOrder</servlet-name>
+    <url-pattern>/pay</url-pattern>
   </servlet-mapping>
 
   <session-config>

@@ -34,6 +34,7 @@ public class UpdateCarType extends HttpServlet {
         try {
             carTypeService.addCarType(carType);
         } catch (DuplicateEntryException e) {
+//            resp.sendRedirect("editCarType.jsp?error=" + e.getMessage() + "&carType=" + carType);
             req.setAttribute("error", e.getMessage());
             req.setAttribute("carType", carType);
             RequestDispatcher dispatcher = req.getRequestDispatcher("editCarType.jsp");

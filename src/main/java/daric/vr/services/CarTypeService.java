@@ -7,10 +7,7 @@ import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.exceptions.RequiredFieldIsMissingException;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
+import javax.persistence.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
@@ -79,6 +76,10 @@ public class CarTypeService {
     }
 
     public CarType getCarTypeRef(int id) {
-        return em.getReference(CarType.class, id);
+        try {
+            return em.getReference(CarType.class, id);
+        } catch (EntityNotFoundException e) {
+            throw new EntryNotFoundException("CarType with such id is not found");
+        }
     }
 }

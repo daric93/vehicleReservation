@@ -90,6 +90,10 @@
     <filter-name>GetCarTypes</filter-name>
     <url-pattern>/cars.jsp</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>GetCarTypes</filter-name>
+    <url-pattern>/editCar.jsp</url-pattern>
+  </filter-mapping>
 
   <filter>
     <filter-name>GetCars</filter-name>
@@ -166,6 +170,28 @@
     <servlet-name>PayForOrder</servlet-name>
     <url-pattern>/pay</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>UpdateCar</servlet-name>
+    <servlet-class>daric.vr.servlets.UpdateCar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateCar</servlet-name>
+    <url-pattern>/updateCar</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>GetCar</filter-name>
+    <filter-class>daric.vr.servlets.GetCar</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>GetCar</filter-name>
+    <url-pattern>/editCar.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>GetCar</filter-name>
+    <servlet-name>UpdateCar</servlet-name>
+  </filter-mapping>
 
   <session-config>
     <session-timeout>10</session-timeout>

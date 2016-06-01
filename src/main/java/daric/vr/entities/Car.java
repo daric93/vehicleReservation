@@ -7,6 +7,7 @@ import java.util.List;
 
 @Entity
 @NamedQueries({
+        @NamedQuery(name = "Car.getCar", query = "select car from Car car where car.carId = :carId"),
         @NamedQuery(name = "Car.getAllCars", query = "select c from Car c"),
         @NamedQuery(name = "Car.getByParameters",
                 query = "select car from Car car where car.carId not in (select orders.car from Order orders where orders.startDate < :endDate and orders.endDate > :startDate) and car.address = :city_up and car.active = true "),

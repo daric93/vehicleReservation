@@ -108,13 +108,13 @@
             %>
         </div>
     </div>
-    <form name="myForm" action="getCarType" method="get">
-        <input type="text" name="carTypeId" hidden>
+    <form name="myForm" action="editCar.jsp" method="get">
+        <input type="text" name="carId" hidden>
     </form>
 </div>
 <script>
     function addId(id) {
-        document.myForm.carTypeId.value = id;
+        document.myForm.carId.value = id;
         document.myForm.submit();
     }
 </script>

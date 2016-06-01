@@ -50,10 +50,13 @@ public class CarService {
     @GET
     @Path("{id}")
     public Car getCar(@PathParam("id") int id) {
-        Car car = em.find(Car.class, id);
-        if (car == null)
+        EntityGraph graph = em.createEntityGraph("graph.Car.carTypes");
+        try {
+            return (Car) em.createNamedQuery("Car.getCar").setHint("javax.persistence.fetchgraph", graph).
+                    setParameter("carId", id).getSingleResult();
+        } catch (NoResultException e) {
             throw new EntryNotFoundException("Car with this id is not found");
-        return car;
+        }
     }
 
     @GET

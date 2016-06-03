@@ -95,5 +95,7 @@ footer {
     font-size: small;
     margin-bottom: 2%;
 }
+#map-container { height: 400px }
+
 
 

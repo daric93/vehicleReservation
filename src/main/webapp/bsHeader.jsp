@@ -11,7 +11,7 @@
             <li class="active"><a href="bsHome.jsp">Home</a></li>
             <li><a href="rentalInformation.jsp">Rental Information</a></li>
             <li><a href="#">Vehicles</a></li>
-            <li><a href="#">Contacts</a></li>
+            <li><a href="contacts.jsp">Contacts</a></li>
         </ul>
 
         <% if (session.getAttribute("mail") != null) {%>

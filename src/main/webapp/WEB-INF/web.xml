@@ -193,6 +193,28 @@
     <servlet-name>UpdateCar</servlet-name>
   </filter-mapping>
 
+  <filter>
+    <filter-name>GetUser</filter-name>
+    <filter-class>daric.vr.servlets.GetUser</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>GetUser</filter-name>
+    <url-pattern>/profile.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>GetUser</filter-name>
+    <url-pattern>/editProfile.jsp</url-pattern>
+  </filter-mapping>
+
+  <servlet>
+    <servlet-name>UpdateUser</servlet-name>
+    <servlet-class>daric.vr.servlets.UpdateUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateUser</servlet-name>
+    <url-pattern>/updateUser</url-pattern>
+  </servlet-mapping>
+
   <session-config>
     <session-timeout>10</session-timeout>
   </session-config>

@@ -29,7 +29,6 @@ public class LogIn extends HttpServlet {
             if (Objects.equals(user.getPassword(), pass)) {
                 HttpSession session = req.getSession();
                 session.setAttribute("mail", mail);
-                session.setAttribute("balance", user.getBalance());
                 RequestDispatcher dispatcher = req.getRequestDispatcher("bsHome.jsp");
                 dispatcher.forward(req, resp);
             } else {

@@ -7,38 +7,40 @@
 <body>
 <%@include file="bsHeader.jsp" %>
 <div class="container-fluid" style=" color: darkorange; font-size: small;background-color: white">
-    <form id="form" action="registration" method="post">
+    <form class="form-horizontal" id="form" action="registration" method="post">
         <div class="form-group form-group-sm form-group-my">
-            <label class="control-label col-sm-1 col-sm-offset-3" for="name">Name:</label>
+            <label class="control-label col-sm-1 col-sm-offset-3">Name:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="name" id="name" placeholder="Enter name" required>
+                <small class="text-muted">Use name from your license</small>
             </div>
         </div>
 
         <div class="form-group form-group-sm form-group-my">
-            <label class="control-label col-sm-1 col-sm-offset-3" for="surname">Surname:</label>
+            <label class="control-label col-sm-1 col-sm-offset-3">Surname:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="surname" id="surname" placeholder="Enter surname"
+                <input type="text" class="form-control" name="surname" placeholder="Enter surname"
                        required>
+                <small class="text-muted">Use surname from your license</small>
             </div>
         </div>
 
         <div class="form-group form-group-sm form-group-my">
-            <label class="control-label col-sm-1 col-sm-offset-3" for="date">Birthday:</label>
+            <label class="control-label col-sm-1 col-sm-offset-3">Birthday:</label>
             <div class="col-sm-4">
                 <input type="date" class="form-control" name="date" id="date" placeholder="yyyy-mm-dd" required>
             </div>
         </div>
 
         <div class="form-group form-group-sm form-group-my">
-            <label class="control-label col-sm-1 col-sm-offset-3" for="mail">Mail:</label>
+            <label class="control-label col-sm-1 col-sm-offset-3">Mail:</label>
             <div class="col-sm-4">
                 <input type="email" class="form-control" name="mail" id="mail" placeholder="Enter mail" required>
             </div>
         </div>
 
         <div class="form-group form-group-sm form-group-my">
-            <label class="control-label col-sm-1 col-sm-offset-3" for="phone">Phone:</label>
+            <label class="control-label col-sm-1 col-sm-offset-3">Phone:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter phone number"
                        required>
@@ -46,7 +48,7 @@
         </div>
 
         <div class="form-group form-group-sm form-group-my">
-            <label class="control-label col-sm-1 col-sm-offset-3" for="license">License:</label>
+            <label class="control-label col-sm-1 col-sm-offset-3">License:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="license" id="license" placeholder="Enter license"
                        required>
@@ -54,7 +56,7 @@
         </div>
 
         <div class="form-group form-group-sm form-group-my">
-            <label class="control-label col-sm-1 col-sm-offset-3" for="pass1">Password:</label>
+            <label class="control-label col-sm-1 col-sm-offset-3">Password:</label>
             <div class="col-sm-4">
                 <input type="password" class="form-control" name="password" id="pass1" placeholder="Enter password"
                        required>
@@ -62,7 +64,7 @@
         </div>
 
         <div class="form-group form-group-sm form-group-my">
-            <label class="control-label col-sm-1 col-sm-offset-3" for="pass2">Repeat password:</label>
+            <label class="control-label col-sm-1 col-sm-offset-3">Repeat password:</label>
             <div class="col-sm-4">
                 <input type="password" class="form-control" name="repeat" id="pass2" placeholder="Enter password"
                        required>

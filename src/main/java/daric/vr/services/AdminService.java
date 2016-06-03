@@ -24,7 +24,8 @@ public class AdminService {
     @Path("{mail}")
     public Admin getAdmin(@PathParam("mail") String mail) {
         try {
-            return (Admin) em.createNamedQuery("Admin.getAdmin").setParameter("mail", mail).getSingleResult();
+            return (Admin) em.createNamedQuery("Admin.getAdmin").
+                    setParameter("mail", mail).getSingleResult();
         } catch (NoResultException e) {
             throw new EntryNotFoundException("Admin with such mail is not found");
         }
@@ -37,10 +38,12 @@ public class AdminService {
             em.flush();
             return admin1;
         } catch (PersistenceException e) {
-            if (Throwables.getCausalChain(e).stream().anyMatch(ex -> ex.getMessage().contains("Duplicate entry"))) {
+            if (Throwables.getCausalChain(e).stream().
+                    anyMatch(ex -> ex.getMessage().contains("Duplicate entry"))) {
                 throw new DuplicateEntryException("Admin with such mail already exists");
             } else {
-                Optional<Throwable> opt = Throwables.getCausalChain(e).stream().filter(ex -> ex.getMessage().contains("cannot be null")).findAny();
+                Optional<Throwable> opt = Throwables.getCausalChain(e).stream().
+                        filter(ex -> ex.getMessage().contains("cannot be null")).findAny();
                 if (opt.isPresent())
                     throw new RequiredFieldIsMissingException(opt.get().getMessage());
                 else throw e;

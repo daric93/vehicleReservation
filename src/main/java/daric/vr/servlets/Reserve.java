@@ -24,11 +24,13 @@ public class Reserve extends HttpServlet {
     CarService carService;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         String mail = (String) req.getSession().getAttribute("mail");
         if (mail != null) {
             try {
-                Order order = orderService.addOrder(Integer.parseInt(req.getParameter("id")), mail, req.getParameter("pick_up"), req.getParameter("drop_off"));
+                Order order = orderService.addOrder(Integer.parseInt(req.getParameter("id")), mail,
+                        req.getParameter("pick_up"), req.getParameter("drop_off"));
                 resp.sendRedirect("showOrder.jsp?orderId=" + order.getOrderId());
             } catch (ParseException e) {
                 throw new ServletException(e);

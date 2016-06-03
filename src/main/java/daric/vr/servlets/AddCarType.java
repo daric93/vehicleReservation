@@ -2,9 +2,9 @@ package daric.vr.servlets;
 
 import com.google.common.io.ByteStreams;
 import daric.vr.entities.CarType;
+import daric.vr.exceptions.DuplicateEntryException;
 import daric.vr.exceptions.RequiredFieldIsMissingException;
 import daric.vr.services.CarTypeService;
-import daric.vr.exceptions.DuplicateEntryException;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -20,7 +20,8 @@ public class AddCarType extends HttpServlet {
     CarTypeService carTypeService;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
         CarType carType = new CarType();
         carType.setBrand(req.getParameter("brand"));

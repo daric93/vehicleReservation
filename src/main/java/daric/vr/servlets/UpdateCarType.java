@@ -20,7 +20,8 @@ public class UpdateCarType extends HttpServlet {
     CarTypeService carTypeService;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         CarType carType = new CarType();
         carType.setTypeId(Integer.parseInt(req.getParameter("carTypeId")));
         carType.setBrand(req.getParameter("brand"));
@@ -34,7 +35,6 @@ public class UpdateCarType extends HttpServlet {
         try {
             carTypeService.addCarType(carType);
         } catch (DuplicateEntryException e) {
-//            resp.sendRedirect("editCarType.jsp?error=" + e.getMessage() + "&carType=" + carType);
             req.setAttribute("error", e.getMessage());
             req.setAttribute("carType", carType);
             RequestDispatcher dispatcher = req.getRequestDispatcher("editCarType.jsp");

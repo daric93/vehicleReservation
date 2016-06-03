@@ -29,10 +29,12 @@ public class CarTypeService {
             em.flush();
             return carType;
         } catch (PersistenceException e) {
-            if (Throwables.getCausalChain(e).stream().anyMatch(ex -> ex.getMessage().contains("uniqueBrandModel"))) {
+            if (Throwables.getCausalChain(e).stream().
+                    anyMatch(ex -> ex.getMessage().contains("uniqueBrandModel"))) {
                 throw new DuplicateEntryException("Duplicate Car Type");
             } else {
-                Optional<Throwable> opt = Throwables.getCausalChain(e).stream().filter(ex -> ex.getMessage().contains("cannot be null")).findAny();
+                Optional<Throwable> opt = Throwables.getCausalChain(e).stream().
+                        filter(ex -> ex.getMessage().contains("cannot be null")).findAny();
                 if (opt.isPresent())
                     throw new RequiredFieldIsMissingException(opt.get().getMessage());
                 else
@@ -68,7 +70,8 @@ public class CarTypeService {
     public byte[] fetchImg(@PathParam("id") int id) throws IOException {
         byte[] result;
         try {
-            result = (byte[]) em.createNamedQuery("getImgById").setParameter("id", id).getSingleResult();
+            result = (byte[]) em.createNamedQuery("getImgById").
+                    setParameter("id", id).getSingleResult();
         } catch (NoResultException e) {
             throw new EntryNotFoundException("Entry with such id is not found");
         }

@@ -62,6 +62,5 @@
         document.myForm.orderId.value = row.cells[0].innerText;
         document.myForm.submit();
     }
-
 </script>
 </html>

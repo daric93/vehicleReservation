@@ -17,7 +17,8 @@ public class Orders extends HttpServlet {
     UserService userService;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         try {
             User user = userService.getUserByMail((String) req.getSession().getAttribute("mail"));
             req.setAttribute("orders", user);

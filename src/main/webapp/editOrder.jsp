@@ -20,7 +20,8 @@
     %>
     <div class="row">
         <div class="col-sm-4">
-            <img src="services/carType/fetchImg/<%=order.getCar().getCarType().getTypeId()%>" class="img-responsive">
+            <img src="services/carType/fetchImg/<%=order.getCar().getCarType().getTypeId()%>"
+                 class="img-responsive">
             <p><%=order.getCar().getCarType().getBrand()%>
             </p>
             <p><%=order.getCar().getCarType().getModel()%>
@@ -81,7 +82,8 @@
             <div class="form-group">
                 <label for="datetimepicker2">Drop-off date:</label>
                 <div class='input-group date' id='datetimepicker2'>
-                    <input type='text' class="form-control" name="drop_off" id="drop_off_date" required/>
+                    <input type='text' class="form-control" name="drop_off"
+                           id="drop_off_date" required/>
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
             </span>

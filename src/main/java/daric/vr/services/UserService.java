@@ -27,10 +27,12 @@ public class UserService {
             em.flush();
             return user1;
         } catch (PersistenceException e) {
-            if (Throwables.getCausalChain(e).stream().anyMatch(ex -> ex.getMessage().contains("Duplicate entry"))) {
+            if (Throwables.getCausalChain(e).stream().
+                    anyMatch(ex -> ex.getMessage().contains("Duplicate entry"))) {
                 throw new DuplicateEntryException("User with this mail already exists");
             } else {
-                Optional<Throwable> opt = Throwables.getCausalChain(e).stream().filter(ex -> ex.getMessage().contains("cannot be null")).findAny();
+                Optional<Throwable> opt = Throwables.getCausalChain(e).stream().
+                        filter(ex -> ex.getMessage().contains("cannot be null")).findAny();
                 if (opt.isPresent())
                     throw new RequiredFieldIsMissingException(opt.get().getMessage());
                 else throw e;

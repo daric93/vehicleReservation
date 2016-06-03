@@ -125,8 +125,10 @@ public class OrderService {
             user.setBalance(user.getBalance() + order.getTotalPrice());
         } else {
             if (order.getStartDate().before(now) && order.getEndDate().after(now)) {
-                long durationAllInMin = TimeUnit.MILLISECONDS.toMinutes(order.getEndDate().getTime() - order.getStartDate().getTime());
-                long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(now.getTime() - order.getStartDate().getTime());
+                long durationAllInMin = TimeUnit.MILLISECONDS.
+                        toMinutes(order.getEndDate().getTime() - order.getStartDate().getTime());
+                long diffInMinutes = TimeUnit.MILLISECONDS.
+                        toMinutes(now.getTime() - order.getStartDate().getTime());
                 double price = order.getTotalPrice() / durationAllInMin * diffInMinutes + 10;
                 User user = order.getUser();
                 user.setBalance(user.getBalance() + (order.getTotalPrice() - price));
@@ -144,7 +146,8 @@ public class OrderService {
     public Order getOrderWithCar(@PathParam("id") int id) {
         EntityGraph graph = em.createEntityGraph("graph.Order.car");
         try {
-            return (Order) em.createNamedQuery("Order.getOrderWithCar").setParameter("id", id).setHint("javax.persistence.fetchgraph", graph).getSingleResult();
+            return (Order) em.createNamedQuery("Order.getOrderWithCar").setParameter("id", id).
+                    setHint("javax.persistence.fetchgraph", graph).getSingleResult();
         } catch (NoResultException e) {
             throw new EntryNotFoundException(e.getMessage());
         }

@@ -73,7 +73,8 @@
                         </p>
                     </div>
                     <div class="col-sm-4">
-                        <img src="services/carType/fetchImg/<%=car.getCarType().getTypeId()%>" class="img-responsive">
+                        <img src="services/carType/fetchImg/<%=car.getCarType().getTypeId()%>"
+                             class="img-responsive">
                     </div>
                 </div>
                 <div class="text-left">

@@ -20,11 +20,14 @@ public class Search extends HttpServlet {
     CarService service;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         if (req.getParameter("city_up") != null) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             try {
-                List<Car> cars = service.getCars(req.getParameter("city_up"), dateFormat.parse(req.getParameter("pick_up")), dateFormat.parse(req.getParameter("drop_off")));
+                List<Car> cars = service.getCars(req.getParameter("city_up"),
+                        dateFormat.parse(req.getParameter("pick_up")),
+                        dateFormat.parse(req.getParameter("drop_off")));
                 req.setAttribute("cars", cars);
                 RequestDispatcher dispatcher = req.getRequestDispatcher("SearchPage.jsp");
                 dispatcher.forward(req, resp);

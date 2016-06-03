@@ -20,7 +20,8 @@ public class Registration extends HttpServlet {
     UserService service;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         //TODO: make a hint in registration form about name and surname
         User user = new User();
         user.setName(req.getParameter("name"));
@@ -28,7 +29,8 @@ public class Registration extends HttpServlet {
         user.setMail(req.getParameter("mail"));
         user.setLicense(req.getParameter("license"));
         user.setTelNumber(req.getParameter("phone"));
-        user.setDateOfBirth(LocalDate.parse(req.getParameter("date"), DateTimeFormatter.ISO_LOCAL_DATE));
+        user.setDateOfBirth
+                (LocalDate.parse(req.getParameter("date"), DateTimeFormatter.ISO_LOCAL_DATE));
         user.setPassword(req.getParameter("password"));
         user.setBalance(1000);
 

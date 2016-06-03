@@ -21,9 +21,11 @@ public class AddCar extends HttpServlet {
     CarService carService;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         Car car = new Car();
-        CarType carTypeRef = carTypeService.getCarTypeRef(Integer.parseInt(req.getParameter("carType")));
+        CarType carTypeRef = carTypeService.getCarTypeRef(
+                Integer.parseInt(req.getParameter("carType")));
         car.setCarType(carTypeRef);
         car.setAddress(req.getParameter("address"));
         car.setLicenseNumber(req.getParameter("number"));

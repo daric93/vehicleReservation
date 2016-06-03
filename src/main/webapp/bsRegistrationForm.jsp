@@ -7,7 +7,7 @@
 <body>
 <%@include file="bsHeader.jsp" %>
 <div class="container-fluid" style=" color: darkorange; font-size: small;background-color: white">
-    <form id="form" action="registration" method="post" >
+    <form id="form" action="registration" method="post">
         <div class="form-group form-group-sm form-group-my">
             <label class="control-label col-sm-1 col-sm-offset-3" for="name">Name:</label>
             <div class="col-sm-4">
@@ -76,43 +76,6 @@
         <p id="p" style="color: red"></p>
     </form>
 </div>
-<%--<form id="form" action="registration" method="post">--%>
-<%--<label>Name:<br>--%>
-<%--<input type="text" name="name" required>--%>
-<%--</label><br>--%>
-
-<%--<label>Surname:<br>--%>
-<%--<input type="text" name="surname" required>--%>
-<%--</label><br>--%>
-
-<%--<label>Birthday:<br>--%>
-<%--<input type="date" name="date" required>--%>
-<%--</label><br>--%>
-
-<%--<label>E-mail:<br>--%>
-<%--<input type="email" name="mail" required>--%>
-<%--</label><br>--%>
-
-<%--<label>Mobile number:<br>--%>
-<%--<input type="text" name="phone" required>--%>
-<%--</label><br>--%>
-
-<%--<label>License:<br>--%>
-<%--<input type="text" name="license">--%>
-<%--</label><br>--%>
-
-<%--<label>Password:<br>--%>
-<%--<input id="pass1" type="password" name="password" required>--%>
-<%--</label><br>--%>
-
-<%--<label>Repeat password:<br>--%>
-<%--<input id="pass2" type="password" name="repeat" required>--%>
-<%--</label><br>--%>
-
-<%--<p><input type="button" value="Register" onclick="checkPass()">--%>
-<%--<a href="bsHome.jsp">Cancel</a></p>--%>
-<%--<p id="p" style="color: red"></p>--%>
-<%--</form>--%>
 <script>
     function checkPass() {
         var pass1 = document.getElementById('pass1');

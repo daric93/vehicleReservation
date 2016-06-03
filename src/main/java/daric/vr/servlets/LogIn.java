@@ -19,7 +19,8 @@ public class LogIn extends HttpServlet {
     UserService serv;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
         String mail = req.getParameter("mail");
         String pass = req.getParameter("password");

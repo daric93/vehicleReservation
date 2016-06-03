@@ -5,7 +5,7 @@ import javax.ws.rs.core.Application;
 import java.util.Set;
 
 @ApplicationPath("/services")
-public class ServiceConf extends Application{
+public class ServiceConf extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         return getRestResourceClasses();

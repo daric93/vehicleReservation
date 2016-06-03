@@ -9,9 +9,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-public class LogOut extends HttpServlet{
+public class LogOut extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.invalidate();
         RequestDispatcher dispatcher = req.getRequestDispatcher("bsHome.jsp");

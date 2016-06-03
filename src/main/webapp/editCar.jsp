@@ -16,25 +16,34 @@
             car = (Car) request.getSession().getAttribute("car");
         List<CarType> carTypes = (List<CarType>) request.getAttribute("carTypes");
         if (request.getParameter("error") != null) {
-    %><p><%=request.getParameter("error")%>
-</p><%
-    }
-    if (request.getParameter("success") != null) {
-%><p><%=request.getParameter("success")%>
-</p><%
-    }
-%>
+    %>
+    <div class="alert-danger">
+        <p><%=request.getParameter("error")%>
+        </p>
+    </div>
+    <%
+        }
+        if (request.getParameter("success") != null) {
+    %>
+    <div class="alert-danger">
+        <p><%=request.getParameter("success")%>
+        </p>
+    </div>
+    <%
+        }
+    %>
     <form action="updateCar" method="post">
         <div class="form-group form-group-sm form-my-style">
             <label for="carType">Car Type</label>
             <select class="form-control" id="carType" name="carType">
-                <option value="<%=car.getCarType().getTypeId()%>" selected><%=car.getCarType().getBrand()%>
-                    , <%=car.getCarType().getModel()%>
+                <option value="<%=car.getCarType().getTypeId()%>" selected>
+                    <%=car.getCarType().getBrand()%>, <%=car.getCarType().getModel()%>
                 </option>
                 <%
                     for (CarType carType : carTypes) {
                 %>
-                <option value="<%=carType.getTypeId()%>"><%=carType.getBrand()%>, <%=carType.getModel()%>
+                <option value="<%=carType.getTypeId()%>"><%=carType.getBrand()%>,
+                    <%=carType.getModel()%>
                 </option>
                 <%
                     }
@@ -43,12 +52,14 @@
         </div>
         <div class="form-group form-group-sm">
             <label for="address">Address</label>
-            <input type="text" class="form-control" id="address" name="address" value="<%=car.getAddress()%>"
+            <input type="text" class="form-control" id="address" name="address"
+                   value="<%=car.getAddress()%>"
                    required>
         </div>
         <div class="form-group form-group-sm">
             <label for="number">Number</label>
-            <input type="text" class="form-control" id="number" name="number" value="<%=car.getLicenseNumber()%>"
+            <input type="text" class="form-control" id="number" name="number"
+                   value="<%=car.getLicenseNumber()%>"
                    required>
         </div>
         <div class="form-group form-group-sm">
@@ -58,7 +69,8 @@
         </div>
         <div class="form-group form-group-sm">
             <label for="active">Active</label>
-            <input type="checkbox" class="form-control" id="active" name="active" value="<%=car.isActive()%>">
+            <input type="checkbox" class="form-control" id="active" name="active"
+                   value="<%=car.isActive()%>">
         </div>
         <input type="text" name="carId"
                value="<%=car.getCarId()%>" hidden>

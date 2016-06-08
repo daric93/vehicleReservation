@@ -1,6 +1,7 @@
 package daric.vr.entities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +87,7 @@ public class User {
         this.telNumber = telNumber;
     }
 
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }

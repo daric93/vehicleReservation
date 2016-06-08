@@ -1,101 +1,175 @@
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+body {
+    position: relative;
+    margin: 0;
+    min-height: 100%;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    padding-bottom: 120px;
+    background-color: #b5b5b7;
+}
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
+    background-color: #252839;
+    color: #f2b632;
+    font-weight: bold;
+}
+.navbar a{
+    color: #f2b632;
 }
 
-.page-header {
-    color: darkorange;
+.page-header{
+    color: #f2b632;
     text-align: center;
-    background-color: #3e3b46;
+    background-color: #677077;
     font-weight: bold;
     padding-bottom: 0px;
     margin: 0;
     border-bottom: none;
+    padding-left: 3%;
+    padding-right: 3%;
 }
 
 footer {
-    background-color: #101010;
-    padding: 25px;
+    background-color: #252839;
+    padding-top: 10px;
     font-size: x-small;
     color: white;
+    /*position: absolute;*/
+    /*width: 100%;*/
+    /*bottom: 0px;*/
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
-.img-responsive-my {
-    background: url(../img/bmw5_640x476.png) no-repeat center;
-    background-size: cover;
-    width: 75%;
-    height: 75%;
+.mainPage {
+    position: relative;
+    margin: 0;
+    min-height: 100%;
+    background-color:#b5b5b7;
+    color: #252839;
+    font-size: small;
+    /*height: 90%;*/
+}
+.page-padding{
+    padding: 1%;
+    color: #252839;
 }
 
-#mainPage{
-    background-color: #3e3b46;
-    padding: 3%;
+#searchForm {
+    padding: 1% 2%;
+    background-color: #f2b632;
+    border: thin solid #677077;
 }
 
-#searchForm{
-    padding: 5%;
-    background-color: darkorange;
-    border: thin solid white;
-}
-#inf h3{
+#inf h3 {
     font-weight: bold;
     font-size: small;
 }
-#inf h2{
-    color: darkorange;
+
+#inf h2 {
+    color: #252839;
     font-weight: bold;
     font-size: small;
 }
-#inf p{
+
+#inf p {
     font-size: small;
 }
-#refs li a{
-    color: darkorange;
+
+#refs li a {
+    color: #252839;
     font-weight: bold;
 }
-#refs li a:hover{
-    color: orangered;
+
+#refs li a:hover {
+    color: #d58512;
 }
-#searchDiv{
-    background-color: #3e3b46;
+
+#searchDiv {
+    background-color: #b5b5b7;
     padding-top: 3%;
 }
 
 .form-group-my {
-    padding-top: 3%;
+    padding-top: 1%;
 }
 
-.img-icons{
+.img-icons {
     width: 18px;
     height: 18px;
     opacity: 0.5
 }
-.font-li-my{
+
+.font-li-my {
     font-size: small;
     color: #262626;
 }
 
-.list-my li{
+.list-my li {
     padding-top: 2%;
 }
-.car-brand{
+
+.car-brand {
     font-weight: bold;
     font-size: large;
     padding-top: 5%;
 }
-.table-types img{
+
+.table-types img {
     width: 45px;
     height: 30px;
 }
-.table-types{
+
+.table-types {
     font-size: small;
 }
 
-.form-my-style{
+.form-my-style {
     font-size: small;
     margin-bottom: 2%;
 }
-#map-container { height: 400px }
+
+#map-container {
+    height: 400px
+}
+
+.wellColor{
+    background-color: #677077;
+}
+
+.form-control-padding{
+    padding-right: 4px;
+    padding-left: 4px;
+}
+.btn-success{
+    background-color: #f2b632;
+    border-color: #f2b632;
+    color: #252839;
+}
+.btn-success :hover{
+    background-color: #d58512;
+}
+.btn-default{
+    background-color: #677077;
+    color: #f2b632;
+}
+.btn-info{
+    background-color: #677077;
+    border-color: #677077;
+}
+.adminLog{
+    height: 100%;
+    background-color: #677077;
+}
+
+
+
 
 
 

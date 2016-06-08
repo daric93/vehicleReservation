@@ -5,25 +5,37 @@
         <p>Book cars fast and easy</p>
     </div>
 </div>
-<nav class="navbar navbar-inverse">
+<nav class="navbar">
     <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="bsHome.jsp">Home</a></li>
-            <li><a href="rentalInformation.jsp">Rental Information</a></li>
-            <li><a href="#">Vehicles</a></li>
-            <li><a href="contacts.jsp">Contacts</a></li>
+            <li class="nav-item active">
+                <a href="bsHome.jsp">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="rentalInformation.jsp">Rental Information</a>
+            </li>
+            <li class="nav-item">
+                <a href="#">Vehicles</a>
+            </li>
+            <li class="nav-item">
+                <a href="contacts.jsp">Contacts</a>
+            </li>
         </ul>
 
         <% if (session.getAttribute("mail") != null) {%>
         <div class="nav navbar-nav navbar-right">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-user"></span></button>
-            <ul class="dropdown-menu">
-                <li><a href="profile.jsp">Profile</a></li>
-                <%--TODO: don't put balance to session--%>
-                <li><a href="orders">Orders</a></li>
-                <li><a href="logout">Log Out</a></li>
-            </ul>
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button class="btn btn-default dropdown-toggle navbar-brand" type="button" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="profile.jsp">Profile</a></li>
+                        <%--TODO: don't put balance to session--%>
+                        <li><a href="orders.jsp">Orders</a></li>
+                        <li><a href="logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <%} else {%>
         <ul class="nav navbar-nav navbar-right">

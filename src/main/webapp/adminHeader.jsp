@@ -5,7 +5,7 @@
         <p>Book cars fast and easy</p>
     </div>
 </div>
-<nav class="navbar navbar-inverse">
+<nav class="navbar">
     <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
             <li class="active"><a href="adminHomePage.jsp">Home</a></li>

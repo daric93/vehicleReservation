@@ -7,8 +7,8 @@
 </head>
 <body>
 <%@include file="adminHeader.jsp" %>
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid mainPage">
+    <div class="row page-padding">
         <%
             CarType carType = (CarType) request.getAttribute("carType");
             if (request.getAttribute("error") != null) {
@@ -83,11 +83,9 @@
                            required>
                 </div>
                 <div class="form-group form-group-sm">
-                    <input type="submit" value="Update">
+                    <input class="btn btn-success" type="submit" value="Update">
+                    <a href="carTypes.jsp" class="btn btn-info" role="button">Cancel</a>
                 </div>
-
-                <a href="carTypes.jsp" class="btn btn-info" role="button">Cancel</a>
-
             </div>
         </form>
     </div>

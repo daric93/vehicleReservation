@@ -7,7 +7,7 @@
 </head>
 <body>
 <%@include file="bsHeader.jsp" %>
-<div class="container-fluid">
+<div class="container-fluid mainPage page-padding">
     <%
         if (request.getParameter("error") != null) {
     %>

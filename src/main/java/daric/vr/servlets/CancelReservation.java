@@ -1,5 +1,6 @@
 package daric.vr.servlets;
 
+import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.exceptions.OrderAlreadyFinishedException;
 import daric.vr.services.OrderService;
 
@@ -25,8 +26,9 @@ public class CancelReservation extends HttpServlet {
             req.setAttribute("error", e.getMessage());
             RequestDispatcher dispatcher = req.getRequestDispatcher("showOrder.jsp");
             dispatcher.forward(req, resp);
+        } catch (EntryNotFoundException e) {
+            resp.sendError(500, e.getMessage());
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("orders");
-        dispatcher.forward(req, resp);
+        resp.sendRedirect("orders.jsp");
     }
 }

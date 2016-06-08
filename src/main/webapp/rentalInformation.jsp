@@ -6,7 +6,7 @@
 </head>
 <body>
 <%@include file="bsHeader.jsp" %>
-<div class="container-fluid" id="inf">
+<div class="container-fluid mainPage" id="inf">
     <div class="row-fluid">
         <div class="col-sm-4 col-md-offset-1">
             <ul class="list-unstyled" id="refs" style="padding-top: 10%">

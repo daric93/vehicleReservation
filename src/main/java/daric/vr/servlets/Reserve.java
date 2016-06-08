@@ -29,6 +29,9 @@ public class Reserve extends HttpServlet {
         String mail = (String) req.getSession().getAttribute("mail");
         if (mail != null) {
             try {
+                System.out.println(req.getParameter("pick_up"));
+                System.out.println(req.getParameter("drop_off"));
+
                 Order order = orderService.addOrder(Integer.parseInt(req.getParameter("id")), mail,
                         req.getParameter("pick_up"), req.getParameter("drop_off"));
                 resp.sendRedirect("showOrder.jsp?orderId=" + order.getOrderId());

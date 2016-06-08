@@ -6,9 +6,9 @@
 </head>
 <body>
 <%@include file="bsHeader.jsp" %>
-<div class="container">
+<div class="container-fluid mainPage page-padding">
     <div class="row">
-        <fieldset class="col-sm-4">
+        <fieldset class="col-sm-offset-2 col-sm-4">
             <legend>Our Contacts</legend>
             <address>
                 <strong>CarReservation</strong><br>
@@ -28,7 +28,7 @@
                 </div>
             </form>
         </fieldset>
-        <div id="map-container" class="col-sm-8"></div>
+        <div id="map-container" class="col-sm-4"></div>
     </div>
 </div>
 <%@include file="html/footer" %>

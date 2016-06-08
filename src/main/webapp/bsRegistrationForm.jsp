@@ -6,7 +6,7 @@
 </head>
 <body>
 <%@include file="bsHeader.jsp" %>
-<div class="container-fluid" style=" color: darkorange; font-size: small;background-color: white">
+<div class="container-fluid mainPage form-control-padding page-padding">
     <form class="form-horizontal" id="form" action="registration" method="post">
         <div class="form-group form-group-sm form-group-my">
             <label class="control-label col-sm-1 col-sm-offset-3">Name:</label>
@@ -71,9 +71,10 @@
             </div>
         </div>
 
-        <div class="form-group form-group-sm col-sm-offset-6 form-group-my">
+        <div class="form-actions form-group-sm col-sm-offset-4 col-sm-4 form-group-my">
             <input class="btn btn-success" type="button" value="Register" onclick="checkPass()">
             <a href="bsHome.jsp" class="btn btn-default">Cancel</a>
+            <br>
         </div>
         <p id="p" style="color: red"></p>
     </form>

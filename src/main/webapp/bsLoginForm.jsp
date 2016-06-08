@@ -6,11 +6,11 @@
 </head>
 <body>
 <%@include file="bsHeader.jsp" %>
-<div class="container-fluid" id="mainPage">
+<div class="container-fluid mainPage">
     <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
             <form name="logIn" action="login" method="post">
-                <h4 style="color: darkorange; font-weight: bold">Please enter your login data here</h4>
+                <h4 style="color: #252839; font-weight: bold">Please enter your login data here</h4>
                 <div class="input-group input-group-sm">
   <span class="input-group-addon">
     <span class="glyphicon glyphicon-envelope"></span>

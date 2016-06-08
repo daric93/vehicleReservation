@@ -5,8 +5,8 @@
     <title>Admin Home</title>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="container-fluid" id="mainPage">
+<div class="container-fluid adminLog">
+    <div class="container-fluid" style="padding-top: 10%">
         <div class="row">
             <div class="col-sm-4 col-sm-offset-4">
                 <form name="logIn" action="adminLogIn" method="get">

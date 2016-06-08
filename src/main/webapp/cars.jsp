@@ -9,10 +9,10 @@
 </head>
 <body>
 <%@include file="adminHeader.jsp" %>
-<div class="container-fluid">
+<div class="container-fluid mainPage">
     <div class="row">
-        <div class="col-sm-3 col-sm-offset-1" id="mainPage">
-            <div class="well">
+        <div class="col-sm-3 col-sm-offset-1">
+            <div class="well wellColor">
                 <%
                     String error = request.getParameter("error");
                     if (error != null) {

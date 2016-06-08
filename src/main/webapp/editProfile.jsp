@@ -7,7 +7,7 @@
 </head>
 <body>
 <%@include file="bsHeader.jsp" %>
-<div class="container">
+<div class="container mainPage">
     <%
         User user = (User) request.getAttribute("user");
         if (request.getAttribute("error") != null) {
@@ -37,7 +37,7 @@
             <div class="col-sm-4">
                 <input type="date" class="form-control" name="date" placeholder="yyyy-mm-dd"
                        value="<%=user.getDateOfBirth()%>">
-                <%--TODO: add restriction to field's input--%>
+                <%--TODO: add restriction to field's input, Validator Bootstrap--%>
             </div>
         </div>
         <div class="form-group">

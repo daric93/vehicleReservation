@@ -8,10 +8,10 @@
 </head>
 <body>
 <%@include file="adminHeader.jsp" %>
-<div class="container-fluid">
+<div class="container-fluid mainPage">
     <div class="row">
-        <div class="col-sm-3 col-sm-offset-1" id="mainPage">
-            <div class="well">
+        <div class="col-sm-3 col-sm-offset-1">
+            <div class="well wellColor">
                 <form action="addCarType" method="post" enctype="multipart/form-data">
                     <div class="form-group form-group-sm form-my-style">
                         <label for="brand">Brand</label>

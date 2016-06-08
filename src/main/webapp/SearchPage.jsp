@@ -8,14 +8,14 @@
 </head>
 <body>
 <%@include file="bsHeader.jsp" %>
-<div class="container-fluid" id="searchDiv">
+<div class="container-fluid mainPage page-padding" id="searchDiv">
     <div class="row">
-        <div class="col-sm-4">
-            <div class="wrapper" id="cont">
+        <div>
+            <div class="wrapper col-sm-offset-1" id="cont">
                 <%@include file="html/searchBox.html" %>
             </div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-7">
             <%
                 String error = (String) request.getParameter("error");
                 if (error != null) {
@@ -32,7 +32,7 @@
         } else {
             for (Car car : cars) {
         %>
-            <div class="well">
+            <div class="well wellColor">
                 <div class="row">
                     <div class="col-sm-3 font-li-my">
                         <ul class="list-unstyled list-my">
@@ -96,7 +96,6 @@
 <%@include file="html/footer" %>
 <script>
     document.getElementById("city_up").value = "<%=request.getParameter("city_up")%>";
-    document.getElementById("city_off").value = "<%=request.getParameter("city_off")%>";
     document.getElementById("pick_up_date").value = "<%=request.getParameter("pick_up")%>";
     document.getElementById("drop_off_date").value = "<%=request.getParameter("drop_off")%>";
 
@@ -110,7 +109,6 @@
 
     function bookCar(form) {
         addHidden(form, 'city_up', document.getElementById("city_up").value);
-        addHidden(form, 'city_off', document.getElementById("city_off").value);
         addHidden(form, 'pick_up', document.getElementById("pick_up_date").value);
         addHidden(form, 'drop_off', document.getElementById("drop_off_date").value);
     }

@@ -1,5 +1,6 @@
 <%@ page import="daric.vr.entities.Order" %>
 <%@ page import="daric.vr.entities.User" %>
+<%@ page import="static daric.vr.servlets.FormatUtil.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,9 +9,9 @@
 </head>
 <body>
 <%@include file="bsHeader.jsp" %>
-<div class="container-fluid">
+<div class="container-fluid mainPage page-padding">
     <%
-        User user = (User) request.getAttribute("orders");
+        User user = (User) request.getAttribute("user");
         if (user.getOrders().isEmpty()) {
     %>
     <p>No orders</p>
@@ -33,11 +34,11 @@
         <tr onclick="getElements(this)">
             <td id="id"><%=order.getOrderId()%>
             </td>
-            <td><%=order.getStartDate()%>
+            <td><%=formatDate(order.getStartDate())%>
             </td>
-            <td><%=order.getEndDate()%>
+            <td><%=formatDate(order.getEndDate())%>
             </td>
-            <td><%=order.getTotalPrice()%>
+            <td><%=formatMoney(order.getTotalPrice())%>
             </td>
             <td><%
                 if (order.isPaymentReceived()) { %>Received

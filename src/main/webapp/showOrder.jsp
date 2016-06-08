@@ -1,4 +1,6 @@
 <%@ page import="daric.vr.entities.Order" %>
+<%@ page import="static daric.vr.servlets.FormatUtil.formatDate" %>
+<%@ page import="static daric.vr.servlets.FormatUtil.formatMoney" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -7,7 +9,7 @@
 </head>
 <body>
 <%@include file="bsHeader.jsp" %>
-<div class="container-fluid">
+<div class="container-fluid mainPage page-padding">
     <%
         Order order = (Order) request.getAttribute("order");
         if (order != null) {
@@ -26,17 +28,17 @@
             </p>
             <p>Trunk Volume: <%=order.getCar().getCarType().getTrunkVolume()%>
             </p>
-            <p>Price per hour: <%=order.getCar().getCarType().getPrice()%>
+            <p>Price per hour: <%=formatMoney(order.getCar().getCarType().getPrice())%>
             </p>
         </div>
         <div class="col-sm-6">
             <p>Order: <%=order.getOrderId()%>
             </p>
-            <p>Start date: <%=order.getStartDate()%>
+            <p>Start date: <%=formatDate(order.getStartDate())%>
             </p>
-            <p>End date:<%=order.getEndDate()%>
+            <p>End date:<%=formatDate(order.getEndDate())%>
             </p>
-            <p>Total price: <%=order.getTotalPrice()%>
+            <p>Total price: <%=formatMoney(order.getTotalPrice())%>
             </p>
             <p>Payment: <%=order.isPaymentReceived()%>
             </p>

@@ -1,4 +1,5 @@
 <%@ page import="daric.vr.entities.User" %>
+<%@ page import="static daric.vr.servlets.FormatUtil.formatMoney" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -7,15 +8,15 @@
 </head>
 <body>
 <%@include file="bsHeader.jsp" %>
-<div class="container">
+<div class="container mainPage">
     <%
         User user = (User) request.getAttribute("user");
     %>
-    <form class="form-horizontal" action="editProfile.jsp" method="get">
+    <form class="form-horizontal col-sm-offset-3" action="editProfile.jsp" method="get" >
         <div class="form-group">
             <label class="col-sm-2 control-label">Balance</label>
             <div class="col-sm-4">
-                <p class="form-control-static"><%=user.getBalance()%>
+                <p class="form-control-static"><%=formatMoney(user.getBalance())%>
                 </p>
             </div>
         </div>

@@ -1,6 +1,5 @@
-<form role="form" method="get" action="search" name="params" id="searchForm">
-    <div class="row-fluid">
-        <div class="col-sm-6">
+<div class="container col-sm-3" id="searchForm">
+    <form role="form" method="get" action="search" name="params">
             <div class="form-group">
                 <label for="city_up">Pick-up:</label>
                 <select class="form-control" id="city_up" name="city_up" required>
@@ -10,7 +9,6 @@
                     <option>Odessa</option>
                 </select>
             </div>
-            <br>
             <div class="form-group">
                 <label for="datetimepicker1">Pick-up date:</label>
                 <div class='input-group date' id='datetimepicker1'>
@@ -20,34 +18,20 @@
             </span>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="city_off">Drop-off:</label>
-                <select class="form-control" id="city_off" name="city_off">
-                    <option>Kharkiv</option>
-                    <option>Kiev</option>
-                    <option>Lvov</option>
-                    <option>Odessa</option>
-                </select>
-            </div>
-            <br>
             <div class="form-group">
                 <label for="datetimepicker2">Return Date:</label>
-                <div class='input-group date' id='datetimepicker2'>
+                <div class='input-group date ' id='datetimepicker2'>
                     <input type='text' class="form-control" name="drop_off" id="drop_off_date" required/>
             <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
             </span>
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="form-group" style="padding-left: 4%">
-            <button type="submit" name="submit" class="btn btn-default">Search</button>
-        </div>
-    </div>
-</form>
+            <div class="form-group">
+                <button type="submit" name="submit" class="btn btn-default">Search</button>
+            </div>
+    </form>
+</div>
 <script type="text/javascript">
     $(function () {
         var datetimepicker1 = $('#datetimepicker1');
@@ -63,10 +47,12 @@
             minDate: moment()
         });
         datetimepicker1.on("dp.change", function (e) {
-            $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
+            datetimepicker2.data("DateTimePicker").minDate(e.date);
+           // datetimepicker1.data("DateTimePicker").toggle(e.date);
         });
         datetimepicker2.on("dp.change", function (e) {
-            $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
+            datetimepicker1.data("DateTimePicker").maxDate(e.date);
+           // datetimepicker1.data("DateTimePicker").useCurrent(true);
         });
     });
 </script>

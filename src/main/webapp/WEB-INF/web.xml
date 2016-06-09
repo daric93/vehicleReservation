@@ -1,8 +1,13 @@
-<!DOCTYPE web-app PUBLIC
-    "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-    "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
-<web-app>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+    version="3.1">
+  <mime-mapping>
+    <extension>css</extension>
+    <mime-type>text/css;encoding=UTF-8</mime-type>
+  </mime-mapping>
   <welcome-file-list>
     <welcome-file>bsHome.jsp</welcome-file>
   </welcome-file-list>
@@ -51,14 +56,14 @@
     <url-pattern>/reserve</url-pattern>
   </servlet-mapping>
 
-  <!--<servlet>-->
-    <!--<servlet-name>Orders</servlet-name>-->
-    <!--<servlet-class>daric.vr.servlets.Orders</servlet-class>-->
-  <!--</servlet>-->
-  <!--<servlet-mapping>-->
-    <!--<servlet-name>Orders</servlet-name>-->
-    <!--<url-pattern>/orders</url-pattern>-->
-  <!--</servlet-mapping>-->
+  <servlet>
+    <servlet-name>Orders</servlet-name>
+    <servlet-class>daric.vr.servlets.Orders</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Orders</servlet-name>
+    <url-pattern>/orders</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>CancelReservation</servlet-name>
@@ -217,6 +222,15 @@
   <servlet-mapping>
     <servlet-name>UpdateUser</servlet-name>
     <url-pattern>/updateUser</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteOrder</servlet-name>
+    <servlet-class>daric.vr.servlets.DeleteOrder</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteOrder</servlet-name>
+    <url-pattern>/deleteOrder</url-pattern>
   </servlet-mapping>
 
   <session-config>

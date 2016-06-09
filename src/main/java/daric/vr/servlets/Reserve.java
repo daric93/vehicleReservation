@@ -2,6 +2,7 @@ package daric.vr.servlets;
 
 import daric.vr.entities.Order;
 import daric.vr.exceptions.CarIsNotAvailableException;
+import daric.vr.exceptions.EntryNotFoundException;
 import daric.vr.services.CarService;
 import daric.vr.services.OrderService;
 import daric.vr.services.UserService;
@@ -39,6 +40,8 @@ public class Reserve extends HttpServlet {
                 throw new ServletException(e);
             } catch (CarIsNotAvailableException e) {
                 resp.sendRedirect("SearchPage.jsp?error=" + e.getMessage());
+            } catch (EntryNotFoundException e) {
+                resp.sendError(404, e.getMessage());
             }
         } else {
             req.setAttribute("error", "You are not logged in");

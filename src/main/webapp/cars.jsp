@@ -57,7 +57,7 @@
                         <input type="checkbox" class="form-control" id="active" name="active" value="true">
                     </div>
                     <div class="form-group form-group-sm">
-                        <input type="submit" value="Add">
+                        <input type="submit" class="btn btn-success" value="Add">
                     </div>
                 </form>
             </div>

@@ -1,9 +1,5 @@
 <div class="container-fluid mainPage">
-    <div class="wrapper col-sm-offset-4" id="cont">
+    <div class="wrapper col-xs-offset-4 col-sm-offset-4 col-md-offset-4" id="cont">
+        <%@include file='searchBox.html' %>
     </div>
 </div>
-<script>
-    $(function () {
-        $("#cont").load("html/searchBox.html");
-    });
-</script>

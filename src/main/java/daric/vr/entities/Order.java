@@ -4,10 +4,23 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@NamedQuery(name = "Order.getOrderWithCar", query = "select o from Order o where o.orderId = :id")
-@NamedEntityGraph(name = "graph.Order.car",
-        attributeNodes = @NamedAttributeNode(value = "car", subgraph = "carTypeGraph"),
-        subgraphs = @NamedSubgraph(name = "carTypeGraph", attributeNodes = @NamedAttributeNode(value = "carType")))
+@NamedQueries({
+        @NamedQuery(name = "Order.getOrderWithCar", query = "select o from Order o where o.orderId = :id"),
+        @NamedQuery(name = "Order.getOrders", query = "select orders from Order orders")
+})
+@NamedEntityGraphs({
+        @NamedEntityGraph(name = "graph.Order.car",
+                attributeNodes = @NamedAttributeNode(value = "car", subgraph = "carTypeGraph"),
+                subgraphs = @NamedSubgraph(name = "carTypeGraph",
+                        attributeNodes = @NamedAttributeNode(value = "carType"))),
+        @NamedEntityGraph(name = "graph.Order.user&car",
+                attributeNodes = {
+                        @NamedAttributeNode(value = "car", subgraph = "carTypeGraph"),
+                        @NamedAttributeNode(value = "user")
+                },
+                subgraphs = @NamedSubgraph(name = "carTypeGraph",
+                        attributeNodes = @NamedAttributeNode(value = "carType")))
+})
 @Table(name = "CAR_ORDER")
 public class Order {
     @Id

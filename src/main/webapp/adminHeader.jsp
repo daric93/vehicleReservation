@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
             <li class="active"><a href="adminHomePage.jsp">Home</a></li>
-            <li><a href="#">Orders</a></li>
+            <li><a href="orders">Orders</a></li>
             <li><a href="cars.jsp">Vehicles</a></li>
             <li><a href="carTypes.jsp">CarTypes</a></li>
         </ul>

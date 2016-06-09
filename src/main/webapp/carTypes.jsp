@@ -42,7 +42,7 @@
                         <input type="file" id="image" accept="image/*" name="image" required>
                     </div>
                     <div class="form-group form-group-sm">
-                        <input type="submit" value="Add">
+                        <input type="submit" class="btn btn-success" value="Add">
                     </div>
                 </form>
                 <%

@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Stateless
@@ -151,6 +152,14 @@ public class OrderService {
         } catch (NoResultException e) {
             throw new EntryNotFoundException(e.getMessage());
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    @GET
+    @Path("orders")
+    public List<Order> getOrders() {
+        EntityGraph graph = em.createEntityGraph("graph.Order.user&car");
+        return (List<Order>) em.createNamedQuery("Order.getOrders").setHint("javax.persistence.fetchgraph", graph).getResultList();
     }
 
     @PUT

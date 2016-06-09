@@ -15,9 +15,11 @@
         if (order != null) {
     %>
     <div class="row">
-        <div class="col-sm-6">
-            <p><%=order.getCar().getCarType().getImg()%>
-            </p>
+        <div class="col-sm-4">
+            <img src="services/carType/fetchImg/<%=order.getCar().getCarType().getTypeId()%>"
+                 class="img-responsive">
+        </div>
+        <div class="col-sm-4">
             <p>Model: <%=order.getCar().getCarType().getModel()%>
             </p>
             <p>Brand: <%=order.getCar().getCarType().getBrand()%>
@@ -31,7 +33,7 @@
             <p>Price per hour: <%=formatMoney(order.getCar().getCarType().getPrice())%>
             </p>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <p>Order: <%=order.getOrderId()%>
             </p>
             <p>Start date: <%=formatDate(order.getStartDate())%>
@@ -40,7 +42,13 @@
             </p>
             <p>Total price: <%=formatMoney(order.getTotalPrice())%>
             </p>
-            <p>Payment: <%=order.isPaymentReceived()%>
+            <p>Payment: <%
+                 if (order.isPaymentReceived()){
+                     %>Received<%
+                 }else{
+                     %>Unpaid<%
+                 }
+            %>
             </p>
 
             <%

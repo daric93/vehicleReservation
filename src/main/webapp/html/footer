@@ -2,14 +2,25 @@
     <div class="container text-center">
         <div class="row">
             <!--<div class="col-sm-4"></div>-->
-            <!--<div class="col-sm-4"></div>-->
-            <div class="col-sm-4 col-sm-offset-8 text-left">
+            <div class="col-sm-4 col-sm-offset-2" style="font-size: small; text-align: left">
+                <ul class="list-unstyled">
+                    <li><a class="navbar-link" href="bsHome.jsp"><fmt:message key="home"/></a>
+                    </li>
+                    <li><a class="navbar-link" href="rentalInformation.jsp"><fmt:message key="rental"/></a>
+                    </li>
+                    <li><a class="navbar-link" href="contacts.jsp"><fmt:message key="contact"/></a>
+                    </li>
+                    <li><a class="navbar-link" href="support.jsp"><fmt:message key="support"/></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-4 col-sm-offset-2 text-left">
                 <p style="font-weight: bold; color: #2b669a">Contacts:</p>
                 <address>
                     <strong>CarReservation.com</strong><br>
                     Heroev Truda, 19G<br>
                     Kharkiv, Ukraine<br>
-                    <a href="mailto:#">daric2612@gmail.com</a><br>
+                    <a href="mailto:daric2612@gmail.com">daric2612@gmail.com</a><br>
                     <abbr title="Phone">P:</abbr> +38(096) 36-87-818
                 </address>
             </div>

@@ -1,7 +1,7 @@
-<div class="container col-sm-3" id="searchForm">
+<div class="container col-xs-8 col-sm-6 col-md-4" id="searchForm">
     <form role="form" method="get" action="search" name="params">
             <div class="form-group">
-                <label for="city_up">Pick-up:</label>
+                <label for="city_up"><fmt:message key="searchFormStr1"/>:</label>
                 <select class="form-control" id="city_up" name="city_up" required>
                     <option>Kharkiv</option>
                     <option>Kiev</option>
@@ -10,7 +10,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="datetimepicker1">Pick-up date:</label>
+                <label for="datetimepicker1"><fmt:message key="searchFormStr2"/>:</label>
                 <div class='input-group date' id='datetimepicker1'>
                     <input type='text' class="form-control" name="pick_up" id="pick_up_date" required/>
             <span class="input-group-addon">
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="datetimepicker2">Return Date:</label>
+                <label for="datetimepicker2"><fmt:message key="searchFormStr3"/>:</label>
                 <div class='input-group date ' id='datetimepicker2'>
                     <input type='text' class="form-control" name="drop_off" id="drop_off_date" required/>
             <span class="input-group-addon">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" name="submit" class="btn btn-default">Search</button>
+                <button type="submit" name="submit" class="btn btn-default"><fmt:message key="search"/></button>
             </div>
     </form>
 </div>
